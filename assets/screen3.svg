@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="100%" height="100%">
+  <defs>
+    <linearGradient id="sky-dark" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#050608" />
+      <stop offset="50%" stop-color="#121620" />
+      <stop offset="100%" stop-color="#0a0b0e" />
+    </linearGradient>
+    <linearGradient id="gold-pillar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#785928" />
+      <stop offset="50%" stop-color="#c5a059" />
+      <stop offset="100%" stop-color="#3d2b10" />
+    </linearGradient>
+  </defs>
+
+  <!-- Canvas Background -->
+  <rect width="1200" height="675" fill="url(#sky-dark)" />
+
+  <!-- Fog and Mist Layers -->
+  <ellipse cx="600" cy="550" rx="700" ry="120" fill="#1e2430" opacity="0.4" />
+  <ellipse cx="400" cy="480" rx="500" ry="80" fill="#2d3748" opacity="0.25" />
+
+  <!-- Ancient Multi-Tiered Chinese Timber Pagoda (Deconstructed Architectural Framework) -->
+  <g transform="translate(620, 100)">
+    <!-- Roof Tier 3 (Top) -->
+    <path d="M120 40 L-40 100 L280 100 Z" fill="#141822" stroke="#c5a059" stroke-width="2" />
+    <!-- Dou-gong Brackets Tier 3 -->
+    <rect x="60" y="100" width="120" height="20" fill="#2d1c10" stroke="#785928" stroke-width="1.5" />
+    
+    <!-- Roof Tier 2 (Middle) -->
+    <path d="M120 120 L-100 190 L340 190 Z" fill="#181d28" stroke="#c5a059" stroke-width="2.5" />
+    <!-- Flying Eaves Upcurved Ends -->
+    <path d="M-100 190 Q-130 170 -120 140" fill="none" stroke="#c5a059" stroke-width="3" />
+    <path d="M340 190 Q370 170 360 140" fill="none" stroke="#c5a059" stroke-width="3" />
+    <!-- Dou-gong Brackets Tier 2 -->
+    <rect x="20" y="190" width="200" height="30" fill="#2d1c10" stroke="#785928" stroke-width="1.5" />
+
+    <!-- Roof Tier 1 (Grand Base Eave) -->
+    <path d="M120 220 L-180 320 L420 320 Z" fill="#1f2533" stroke="#c5a059" stroke-width="3" />
+    <path d="M-180 320 Q-220 290 -210 250" fill="none" stroke="#c5a059" stroke-width="3.5" />
+    <path d="M420 320 Q460 290 450 250" fill="none" stroke="#c5a059" stroke-width="3.5" />
+
+    <!-- Timber Columns / Pillars -->
+    <rect x="-40" y="320" width="25" height="230" fill="url(#gold-pillar)" opacity="0.85" />
+    <rect x="70" y="320" width="25" height="230" fill="url(#gold-pillar)" opacity="0.85" />
+    <rect x="180" y="320" width="25" height="230" fill="url(#gold-pillar)" opacity="0.85" />
+    <rect x="290" y="320" width="25" height="230" fill="url(#gold-pillar)" opacity="0.85" />
+
+    <!-- Massive Hanging Iron Chains & Pulleys Intersecting Ancient Pillars -->
+    <line x1="-120" y1="20" x2="-40" y2="350" stroke="#94a3b8" stroke-width="3" stroke-dasharray="6,4" />
+    <line x1="380" y1="10" x2="300" y2="370" stroke="#94a3b8" stroke-width="3" stroke-dasharray="6,4" />
+    <circle cx="-40" cy="350" r="16" fill="#0f172a" stroke="#dc2626" stroke-width="2" />
+    <circle cx="300" cy="370" r="16" fill="#0f172a" stroke="#dc2626" stroke-width="2" />
+  </g>
+
+  <!-- Architectural Blueprint Grid Overlay (Symbolizing Liang Qi's Yale Design Process) -->
+  <g stroke="#38bdf8" stroke-opacity="0.12" stroke-width="1">
+    <line x1="100" y1="50" x2="100" y2="600" />
+    <line x1="250" y1="50" x2="250" y2="600" />
+    <line x1="400" y1="50" x2="400" y2="600" />
+    <line x1="550" y1="50" x2="550" y2="600" />
+    <line x1="700" y1="50" x2="700" y2="600" />
+    <line x1="850" y1="50" x2="850" y2="600" />
+    <line x1="1000" y1="50" x2="1000" y2="600" />
+    <line x1="50" y1="150" x2="1150" y2="150" />
+    <line x1="50" y1="280" x2="1150" y2="280" />
+    <line x1="50" y1="410" x2="1150" y2="410" />
+    <line x1="50" y1="540" x2="1150" y2="540" />
+  </g>
+
+  <!-- Cliffside & Moon Gate Entrance on the Left -->
+  <path d="M0 250 L180 280 L240 380 L190 460 L280 540 L0 580 Z" fill="#131722" stroke="#2a3245" stroke-width="2" />
+  <ellipse cx="140" cy="380" rx="45" ry="65" fill="#090b10" stroke="#c5a059" stroke-width="2" />
+
+  <!-- Single Lone Warrior Silhouette at Moon Gate -->
+  <circle cx="140" cy="360" r="7" fill="#fca5a5" />
+  <path d="M135 367 L145 367 L150 405 L130 405 Z" fill="#f87171" />
+  <line x1="145" y1="375" x2="165" y2="410" stroke="#ffffff" stroke-width="2" />
+
+  <!-- Titles -->
+  <text x="60" y="90" font-family="'Cinzel', serif" font-weight="900" font-size="28" fill="#c5a059" letter-spacing="4">ACT III : YALE ARCHITECTURAL AXIS</text>
+  <text x="60" y="125" font-family="'Noto Serif KR', serif" font-weight="600" font-size="18" fill="#e2e8f0" opacity="0.85">예일대 건축학 디렉터 양기량의 공간 설계 · 당송 고건축과 수직 다층 레벨</text>
+</svg>
+

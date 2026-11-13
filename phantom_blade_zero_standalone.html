@@ -1,0 +1,3704 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phantom Blade Zero (팬텀 블레이드 제로) - 학술 및 작품 분석 가이드</title>
+  <meta name="description" content="한국 교수님을 위한 중국 차세대 액션 RPG '팬텀 블레이드 제로(影之刃零)'의 미학, 서사, 게임 메커니즘 및 동아시아 게임 산업 분석">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Noto+Serif+KR:wght@400;600;700;900&family=Pretendard:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <style>
+/* ===================================================================
+   Phantom Blade Zero (팬텀 블레이드 제로) - Stylesheet
+   Theme: Kungfupunk (Dark Ink-wash, Steam & Crimson Blade)
+   Designed for Academic & Executive Presentation
+   =================================================================== */
+
+:root {
+  --bg-primary: #0a0b0e;
+  --bg-secondary: #12141a;
+  --bg-card: rgba(22, 26, 35, 0.85);
+  --bg-card-hover: rgba(30, 36, 48, 0.95);
+  --bg-glass: rgba(15, 18, 25, 0.75);
+
+  --crimson-primary: #dc2626;
+  --crimson-glow: rgba(220, 38, 38, 0.4);
+  --crimson-dark: #991b1b;
+
+  --gold-primary: #c5a059;
+  --gold-glow: rgba(197, 160, 89, 0.3);
+  --gold-light: #e6cb8f;
+
+  --text-main: #f1f5f9;
+  --text-muted: #94a3b8;
+  --text-dim: #64748b;
+
+  --border-color: rgba(255, 255, 255, 0.08);
+  --border-highlight: rgba(197, 160, 89, 0.25);
+  --border-crimson: rgba(220, 38, 38, 0.35);
+
+  --font-serif: 'Noto Serif KR', 'Cinzel', serif;
+  --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Cinzel', 'Noto Serif KR', serif;
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Reset & Box Sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+}
+
+body {
+  font-family: var(--font-sans);
+  line-height: 1.7;
+  overflow-x: hidden;
+  position: relative;
+  background: radial-gradient(circle at 50% 0%, #171b26 0%, #0a0b0e 70%);
+  min-height: 100vh;
+}
+
+/* Background Ambient Canvas */
+#ambient-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.35;
+}
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* Typography Helpers */
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-serif);
+  color: #ffffff;
+  letter-spacing: -0.01em;
+  font-weight: 700;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+/* Navbar */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  background: rgba(10, 11, 14, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-color);
+  transition: var(--transition);
+}
+
+.nav-container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0.85rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.logo-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  background: linear-gradient(135deg, var(--crimson-dark), #1a0505);
+  border: 1px solid var(--border-crimson);
+  color: #ffdddd;
+  font-family: var(--font-serif);
+  font-weight: 900;
+  font-size: 1.35rem;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 0 15px var(--crimson-glow);
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo-text .en {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.95rem;
+  letter-spacing: 0.12em;
+  color: var(--gold-light);
+}
+
+.logo-text .kr {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  font-weight: 500;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.nav-link {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  position: relative;
+  padding: 0.4rem 0;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: #ffffff;
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--gold-primary);
+  box-shadow: 0 0 8px var(--gold-glow);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.lang-switch {
+  display: flex;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 2px;
+}
+
+.lang-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-dim);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.lang-btn.active {
+  background: var(--gold-primary);
+  color: #000;
+}
+
+.btn-icon {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-icon:hover {
+  color: #fff;
+  border-color: var(--gold-primary);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: rgba(197, 160, 89, 0.12);
+  border: 1px solid var(--gold-primary);
+  color: var(--gold-light);
+  padding: 0.45rem 0.9rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-secondary:hover {
+  background: var(--gold-primary);
+  color: #000;
+  box-shadow: 0 0 15px var(--gold-glow);
+}
+
+/* Hero Section */
+.hero-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 8rem 1.5rem 4rem;
+  background: radial-gradient(circle at 50% 30%, rgba(220, 38, 38, 0.12) 0%, transparent 60%),
+    radial-gradient(circle at 80% 20%, rgba(197, 160, 89, 0.08) 0%, transparent 50%),
+    linear-gradient(180deg, #090a0d 0%, #0d0f14 100%);
+  z-index: 1;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+}
+
+.hero-content {
+  max-width: 960px;
+  position: relative;
+  z-index: 2;
+}
+
+.badge-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 1rem;
+  background: rgba(220, 38, 38, 0.1);
+  border: 1px solid var(--border-crimson);
+  border-radius: 20px;
+  font-size: 0.8rem;
+  color: #fca5a5;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.05em;
+}
+
+.badge-dot {
+  width: 7px;
+  height: 7px;
+  background: var(--crimson-primary);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--crimson-primary);
+  animation: pulseDot 2s infinite;
+}
+
+@keyframes pulseDot {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.4;
+    transform: scale(0.8);
+  }
+}
+
+.hero-title {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.title-sub {
+  font-family: var(--font-sans);
+  font-size: 1.15rem;
+  color: var(--gold-light);
+  letter-spacing: 0.15em;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.title-main {
+  font-family: var(--font-display);
+  font-size: 3.8rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  background: linear-gradient(180deg, #ffffff 30%, #a1a1aa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.1;
+  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+}
+
+.title-hanzi {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  color: #ef4444;
+  letter-spacing: 0.3em;
+  font-weight: 600;
+  margin-top: 0.25rem;
+}
+
+.hero-description {
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  max-width: 800px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.8;
+  word-break: keep-all;
+}
+
+.hero-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  background: rgba(18, 21, 29, 0.65);
+  border: 1px solid var(--border-color);
+  backdrop-filter: blur(10px);
+  padding: 1.25rem;
+  border-radius: var(--radius-md);
+  margin-bottom: 2.5rem;
+}
+
+.meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  text-align: left;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  padding-right: 0.5rem;
+}
+
+.meta-item:last-child {
+  border-right: none;
+}
+
+.meta-item .label {
+  font-size: 0.72rem;
+  color: var(--gold-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+
+.meta-item .val {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hero-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  margin-bottom: 4rem;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: linear-gradient(135deg, var(--crimson-primary), var(--crimson-dark));
+  color: #ffffff;
+  padding: 0.9rem 2rem;
+  border-radius: var(--radius-sm);
+  font-size: 1rem;
+  font-weight: 600;
+  box-shadow: 0 4px 20px var(--crimson-glow);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(220, 38, 38, 0.6);
+  color: #fff;
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(255, 255, 255, 0.04);
+  color: #ffffff;
+  padding: 0.9rem 2rem;
+  border-radius: var(--radius-sm);
+  font-size: 1rem;
+  font-weight: 600;
+  border: 1px solid var(--border-color);
+  backdrop-filter: blur(8px);
+}
+
+.btn-outline:hover {
+  border-color: var(--gold-primary);
+  background: rgba(197, 160, 89, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Stats Float Bar */
+.hero-stats-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  max-width: 980px;
+  background: linear-gradient(90deg, rgba(22, 27, 36, 0.85) 0%, rgba(31, 38, 51, 0.9) 50%, rgba(22, 27, 36, 0.85) 100%);
+  border: 1px solid var(--border-highlight);
+  border-radius: var(--radius-md);
+  padding: 1.5rem 2rem;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+}
+
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.stat-num {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--gold-light);
+  line-height: 1;
+  margin-bottom: 0.35rem;
+}
+
+.stat-num .unit {
+  font-size: 1rem;
+  font-family: var(--font-sans);
+  color: var(--text-muted);
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.stat-divider {
+  width: 1px;
+  height: 45px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* General Section Styles */
+.section {
+  padding: 6.5rem 0;
+  position: relative;
+  z-index: 1;
+}
+
+.section-header {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 3.5rem;
+}
+
+.section-subtitle {
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  letter-spacing: 0.25em;
+  color: var(--crimson-primary);
+  text-transform: uppercase;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.section-title {
+  font-size: 2.3rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  line-height: 1.3;
+}
+
+.title-bar {
+  width: 50px;
+  height: 3px;
+  background: var(--gold-primary);
+  margin: 1rem auto 0;
+  box-shadow: 0 0 10px var(--gold-glow);
+}
+
+.section-desc {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  margin-top: 0.75rem;
+  word-break: keep-all;
+}
+
+/* Letter to Professor Card */
+.academic-letter-card {
+  background: linear-gradient(135deg, rgba(24, 29, 39, 0.95), rgba(15, 18, 26, 0.95));
+  border: 1px solid var(--border-highlight);
+  border-radius: var(--radius-lg);
+  padding: 3rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 0 40px rgba(197, 160, 89, 0.03);
+  position: relative;
+  overflow: hidden;
+}
+
+.academic-letter-card::before {
+  content: '연구보고';
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  font-size: 8rem;
+  font-family: var(--font-serif);
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.015);
+  pointer-events: none;
+  line-height: 1;
+}
+
+.letter-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.stamp-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(197, 160, 89, 0.1);
+  border: 2px dashed var(--gold-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold-light);
+  flex-shrink: 0;
+}
+
+.letter-tag {
+  font-size: 0.8rem;
+  color: var(--gold-primary);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.letter-title {
+  font-size: 1.85rem;
+  color: #fff;
+  margin-top: 0.25rem;
+}
+
+.lead-quote {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: #e2e8f0;
+  line-height: 1.9;
+  padding: 1.25rem 1.75rem;
+  background: rgba(220, 38, 38, 0.06);
+  border-left: 4px solid var(--crimson-primary);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  margin-bottom: 2.5rem;
+  font-style: italic;
+  word-break: keep-all;
+}
+
+.letter-columns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.letter-columns .col h4 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.1rem;
+  color: var(--gold-light);
+  margin-bottom: 0.8rem;
+}
+
+.letter-columns .col p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  word-break: keep-all;
+}
+
+/* Pillars Section */
+.pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.pillar-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 2.5rem;
+  position: relative;
+  transition: var(--transition);
+  overflow: hidden;
+}
+
+.pillar-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--border-highlight);
+  background: var(--bg-card-hover);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+}
+
+.pillar-idx {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.75rem;
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.05);
+}
+
+.pillar-icon {
+  width: 50px;
+  height: 50px;
+  background: rgba(220, 38, 38, 0.12);
+  border: 1px solid var(--border-crimson);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f87171;
+  margin-bottom: 1.5rem;
+}
+
+.pillar-card h3 {
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+  color: #fff;
+}
+
+.pillar-summary {
+  font-size: 0.95rem;
+  color: var(--gold-light);
+  margin-bottom: 1.25rem;
+  font-weight: 500;
+}
+
+.pillar-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-bottom: 1.75rem;
+}
+
+.pillar-list li {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  position: relative;
+  padding-left: 1.25rem;
+  word-break: keep-all;
+}
+
+.pillar-list li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--crimson-primary);
+  font-size: 0.9rem;
+}
+
+.pillar-list strong {
+  color: #fff;
+}
+
+.pillar-tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-family: var(--font-display);
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 0.85rem;
+  width: 100%;
+}
+
+/* Combat & Weapon Showcase */
+.combat-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  align-items: stretch;
+}
+
+.weapon-showcase {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.weapon-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background: rgba(10, 12, 17, 0.9);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.weapon-tab-btn {
+  background: transparent;
+  border: none;
+  border-right: 1px solid var(--border-color);
+  color: var(--text-muted);
+  padding: 1rem 0.5rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.weapon-tab-btn:last-child {
+  border-right: none;
+}
+
+.weapon-tab-btn:hover {
+  background: rgba(255, 255, 255, 0.03);
+  color: #fff;
+}
+
+.weapon-tab-btn.active {
+  background: rgba(220, 38, 38, 0.12);
+  color: #ff8080;
+  border-bottom: 2px solid var(--crimson-primary);
+}
+
+.weapon-display-box {
+  padding: 2.25rem;
+  flex-grow: 1;
+}
+
+.weapon-content {
+  display: none;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 2rem;
+  animation: fadeIn 0.4s ease;
+}
+
+.weapon-content.active {
+  display: grid;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.weapon-type-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  color: var(--gold-light);
+  background: rgba(197, 160, 89, 0.15);
+  border: 1px solid var(--border-highlight);
+  padding: 0.2rem 0.65rem;
+  border-radius: 4px;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.weapon-info h3 {
+  font-size: 1.5rem;
+  color: #ffffff;
+  margin-bottom: 0.85rem;
+}
+
+.weapon-info p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+  word-break: keep-all;
+}
+
+.weapon-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-bottom: 1.5rem;
+}
+
+.w-stat {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.w-stat .bar {
+  flex-grow: 1;
+  max-width: 180px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.w-stat .bar .fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold-primary), var(--crimson-primary));
+  border-radius: 3px;
+}
+
+.choreography-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 0.85rem 1rem;
+  background: rgba(0, 0, 0, 0.3);
+  border-left: 3px solid var(--gold-primary);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: 0.85rem;
+  color: #e2e8f0;
+  font-style: italic;
+  line-height: 1.6;
+}
+
+.weapon-visual {
+  height: 100%;
+  min-height: 250px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  padding: 1rem;
+}
+
+.dual-blade-bg {
+  background: linear-gradient(135deg, rgba(220, 38, 38, 0.3), rgba(10, 11, 14, 0.9)),
+    radial-gradient(circle at 70% 30%, #450a0a, #0a0b0e);
+}
+
+.great-blade-bg {
+  background: linear-gradient(135deg, rgba(197, 160, 89, 0.3), rgba(10, 11, 14, 0.9)),
+    radial-gradient(circle at 70% 30%, #292524, #0a0b0e);
+}
+
+.cannon-bg {
+  background: linear-gradient(135deg, rgba(234, 88, 12, 0.3), rgba(10, 11, 14, 0.9)),
+    radial-gradient(circle at 70% 30%, #431407, #0a0b0e);
+}
+
+.axe-bg {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(10, 11, 14, 0.9)),
+    radial-gradient(circle at 70% 30%, #1e1b4b, #0a0b0e);
+}
+
+.visual-badge {
+  font-size: 0.75rem;
+  background: rgba(0, 0, 0, 0.7);
+  color: var(--gold-light);
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  font-family: var(--font-display);
+}
+
+/* Combat Mechanics Side Cards */
+.combat-mechanics-side {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.mechanic-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1.75rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.mechanic-card:hover {
+  border-color: var(--border-crimson);
+  background: var(--bg-card-hover);
+}
+
+.m-head {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.m-head i {
+  color: var(--crimson-primary);
+  width: 22px;
+  height: 22px;
+}
+
+.m-head h4 {
+  font-size: 1.1rem;
+  color: #fff;
+}
+
+.mechanic-card p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  word-break: keep-all;
+}
+
+/* Narrative Section */
+.narrative-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 2.5rem;
+  align-items: stretch;
+}
+
+.narrative-main-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 2.5rem;
+}
+
+.timeline-visual {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 2.25rem;
+  padding-left: 2rem;
+}
+
+.timeline-visual::before {
+  content: '';
+  position: absolute;
+  left: 7px;
+  top: 10px;
+  bottom: 10px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--crimson-primary) 0%, var(--gold-primary) 100%);
+}
+
+.time-node {
+  position: relative;
+}
+
+.time-node::before {
+  content: '';
+  position: absolute;
+  left: -2rem;
+  top: 5px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--bg-primary);
+  border: 2px solid var(--text-dim);
+}
+
+.time-node.active::before {
+  border-color: var(--crimson-primary);
+  background: var(--crimson-primary);
+  box-shadow: 0 0 12px var(--crimson-primary);
+}
+
+.time-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--gold-primary);
+  letter-spacing: 0.1em;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.time-node h4 {
+  font-size: 1.15rem;
+  color: #ffffff;
+  margin-bottom: 0.4rem;
+}
+
+.time-node p {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  word-break: keep-all;
+}
+
+.philosophy-box {
+  background: linear-gradient(135deg, rgba(26, 30, 42, 0.8), rgba(16, 19, 27, 0.95));
+  border: 1px solid var(--border-highlight);
+  border-radius: var(--radius-md);
+  padding: 2.5rem;
+}
+
+.ph-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.ph-header i {
+  color: var(--gold-primary);
+}
+
+.ph-header h3 {
+  font-size: 1.35rem;
+  color: var(--gold-light);
+}
+
+.ph-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.ph-point h4 {
+  font-size: 1.05rem;
+  color: #ffffff;
+  margin-bottom: 0.4rem;
+}
+
+.ph-point p {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  word-break: keep-all;
+}
+
+/* Comparison Section */
+.comparison-table-wrapper {
+  overflow-x: auto;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
+  margin-bottom: 2.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.92rem;
+}
+
+.comparison-table th,
+.comparison-table td {
+  padding: 1.25rem 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  vertical-align: top;
+  line-height: 1.65;
+}
+
+.comparison-table th {
+  background: rgba(12, 14, 20, 0.9);
+  color: #ffffff;
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  font-weight: 700;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.comparison-table th .sub-th {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  font-family: var(--font-sans);
+  font-weight: normal;
+}
+
+.comparison-table th.highlight {
+  background: rgba(220, 38, 38, 0.15);
+  color: #ff9999;
+  border-bottom-color: var(--crimson-primary);
+}
+
+.comparison-table td.highlight {
+  background: rgba(220, 38, 38, 0.05);
+  border-left: 1px solid rgba(220, 38, 38, 0.15);
+  border-right: 1px solid rgba(220, 38, 38, 0.15);
+}
+
+.comparison-table .row-label {
+  font-weight: 600;
+  color: var(--gold-light);
+  white-space: nowrap;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.comparison-table tbody tr:hover td {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.insight-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  padding: 1.75rem 2rem;
+  background: linear-gradient(90deg, rgba(197, 160, 89, 0.12), rgba(20, 24, 34, 0.8));
+  border: 1px solid var(--border-highlight);
+  border-radius: var(--radius-md);
+}
+
+.insight-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(197, 160, 89, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold-light);
+  flex-shrink: 0;
+}
+
+.insight-text h4 {
+  font-size: 1.15rem;
+  color: var(--gold-light);
+  margin-bottom: 0.5rem;
+}
+
+.insight-text p {
+  font-size: 0.95rem;
+  color: #cbd5e1;
+  line-height: 1.8;
+  word-break: keep-all;
+}
+
+/* Studio & Creator Section */
+.creators-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-bottom: 3.5rem;
+}
+
+.creator-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 2.25rem;
+  position: relative;
+  transition: var(--transition);
+}
+
+.creator-card:hover {
+  border-color: var(--border-highlight);
+  background: var(--bg-card-hover);
+}
+
+.creator-badge {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--gold-primary);
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+
+.creator-profile-header {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.avatar-box {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: rgba(220, 38, 38, 0.1);
+  border: 2px solid var(--border-crimson);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f87171;
+}
+
+.creator-profile-header h3 {
+  font-size: 1.25rem;
+  color: #ffffff;
+}
+
+.creator-profile-header .role {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+
+.creator-bio p {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin-bottom: 1.25rem;
+  word-break: keep-all;
+}
+
+.creator-quote {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 1rem 1.25rem;
+  background: rgba(0, 0, 0, 0.3);
+  border-left: 3px solid var(--crimson-primary);
+  font-size: 0.88rem;
+  color: #e2e8f0;
+  font-style: italic;
+  line-height: 1.6;
+}
+
+.studio-timeline {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 2.5rem;
+}
+
+.timeline-title {
+  font-size: 1.25rem;
+  color: #fff;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.timeline-track {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  position: relative;
+}
+
+.track-item {
+  position: relative;
+  padding-top: 1.5rem;
+  border-top: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.track-item.active {
+  border-top-color: var(--crimson-primary);
+}
+
+.track-item .year {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--gold-light);
+  margin-bottom: 0.4rem;
+}
+
+.track-item h4 {
+  font-size: 1rem;
+  color: #fff;
+  margin-bottom: 0.4rem;
+}
+
+.track-item p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  word-break: keep-all;
+}
+
+/* Academic Section */
+.discussion-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.disc-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 2.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: var(--transition);
+}
+
+.disc-card:hover {
+  border-color: var(--gold-primary);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+.disc-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.disc-num {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--crimson-primary);
+  line-height: 1;
+}
+
+.disc-header h4 {
+  font-size: 1.15rem;
+  color: #fff;
+  line-height: 1.4;
+}
+
+.disc-question {
+  font-size: 0.93rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin-bottom: 1.5rem;
+  word-break: keep-all;
+}
+
+.disc-tag {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 0.75rem;
+  background: rgba(197, 160, 89, 0.12);
+  color: var(--gold-light);
+  padding: 0.25rem 0.65rem;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+/* Media Showcase */
+.media-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.video-wrapper {
+  background: #000;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+}
+
+.responsive-video {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+}
+
+.responsive-video iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.video-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.75rem;
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-color);
+}
+
+.video-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.95rem;
+  color: #fff;
+  font-weight: 600;
+}
+
+.video-badges {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.video-badges .badge {
+  font-size: 0.72rem;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-muted);
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+}
+
+/* Gallery Grid */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.gallery-item {
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.gallery-item:hover {
+  transform: scale(1.02);
+  border-color: var(--gold-primary);
+}
+
+.gallery-thumb {
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.thumb-rain {
+  background-image: linear-gradient(rgba(10, 11, 14, 0.45), rgba(10, 11, 14, 0.85)), url('assets/screen1.svg');
+  background-size: cover;
+  background-position: center;
+}
+
+.thumb-cannon {
+  background-image: linear-gradient(rgba(10, 11, 14, 0.45), rgba(10, 11, 14, 0.85)), url('assets/screen2.svg');
+  background-size: cover;
+  background-position: center;
+}
+
+.thumb-arch {
+  background-image: linear-gradient(rgba(10, 11, 14, 0.45), rgba(10, 11, 14, 0.85)), url('assets/screen3.svg');
+  background-size: cover;
+  background-position: center;
+}
+
+.gallery-overlay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 1rem;
+  text-align: center;
+}
+
+.gallery-overlay i {
+  color: var(--gold-primary);
+}
+
+/* Lightbox Modal */
+.lightbox {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.92);
+  backdrop-filter: blur(10px);
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.lightbox.active {
+  display: flex;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 2rem;
+  right: 2.5rem;
+  font-size: 2.5rem;
+  color: #fff;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.lightbox-close:hover {
+  color: var(--crimson-primary);
+}
+
+.lightbox-img {
+  max-width: 85%;
+  max-height: 80vh;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+}
+
+.lightbox-caption {
+  margin-top: 1rem;
+  font-size: 1rem;
+  color: var(--gold-light);
+  font-family: var(--font-serif);
+}
+
+/* Presentation Modal */
+.presentation-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 11, 14, 0.97);
+  z-index: 200;
+  padding: 2rem;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.presentation-modal.active {
+  display: flex;
+}
+
+.pres-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 2rem;
+}
+
+.pres-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.25rem;
+  color: var(--gold-light);
+  font-family: var(--font-serif);
+}
+
+.pres-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+#pres-page-indicator {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--text-muted);
+}
+
+.pres-nav-btn,
+.pres-close-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-color);
+  color: #fff;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.pres-nav-btn:hover,
+.pres-close-btn:hover {
+  background: var(--gold-primary);
+  color: #000;
+}
+
+.pres-body {
+  max-width: 1000px;
+  margin: 0 auto;
+  width: 100%;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pres-slide {
+  display: none;
+  width: 100%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-highlight);
+  border-radius: var(--radius-lg);
+  padding: 3.5rem;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+  animation: fadeIn 0.4s ease;
+}
+
+.pres-slide.active {
+  display: block;
+}
+
+.slide-tag {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  color: var(--crimson-primary);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.pres-slide h2 {
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
+  color: #ffffff;
+}
+
+.slide-content-split {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 2.5rem;
+}
+
+.slide-content-split .text p {
+  font-size: 1.05rem;
+  margin-bottom: 0.85rem;
+  color: var(--text-muted);
+}
+
+.slide-content-split .text strong {
+  color: #fff;
+}
+
+.slide-content-split .callout {
+  margin-top: 1.5rem;
+  padding: 1.25rem;
+  background: rgba(220, 38, 38, 0.1);
+  border-left: 3px solid var(--crimson-primary);
+  color: #fecaca;
+  font-style: italic;
+  font-size: 0.95rem;
+}
+
+.slide-card-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.mini-metric {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--border-color);
+  padding: 1.25rem;
+  border-radius: var(--radius-sm);
+  text-align: center;
+}
+
+.mini-metric .m-val {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--gold-light);
+}
+
+.mini-metric .m-lbl {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.slide-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.slide-box {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 2rem;
+}
+
+.slide-box h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1.25rem;
+  color: var(--gold-light);
+  margin-bottom: 1.25rem;
+}
+
+.slide-box ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.slide-box li {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  position: relative;
+  padding-left: 1.25rem;
+  line-height: 1.6;
+}
+
+.slide-box li::before {
+  content: '▪';
+  position: absolute;
+  left: 0;
+  color: var(--crimson-primary);
+}
+
+.slide-table-mini table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.slide-table-mini th,
+.slide-table-mini td {
+  padding: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.95rem;
+}
+
+.slide-table-mini th {
+  color: var(--gold-light);
+  font-family: var(--font-serif);
+}
+
+.slide-table-mini td {
+  color: var(--text-muted);
+}
+
+.slide-list-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.slide-list-cards .scard {
+  padding: 1.5rem;
+  background: rgba(0, 0, 0, 0.4);
+  border-left: 4px solid var(--gold-primary);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: 1rem;
+  color: #e2e8f0;
+  line-height: 1.7;
+}
+
+/* Footer */
+.footer {
+  background: #060709;
+  border-top: 1px solid var(--border-color);
+  padding: 5rem 0 2.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 3.5rem;
+  margin-bottom: 3.5rem;
+}
+
+.brand-col .footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.brand-col .footer-title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--gold-light);
+  letter-spacing: 0.1em;
+  font-weight: 700;
+}
+
+.footer-desc {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  line-height: 1.75;
+  word-break: keep-all;
+}
+
+.footer-col h4 {
+  font-size: 1rem;
+  color: #ffffff;
+  margin-bottom: 1.25rem;
+}
+
+.footer-col ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.footer-col a {
+  font-size: 0.88rem;
+  color: var(--text-dim);
+}
+
+.footer-col a:hover {
+  color: var(--gold-primary);
+  padding-left: 4px;
+}
+
+.footer-bottom {
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 2rem;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+  .hero-meta-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .pillars-grid,
+  .creators-grid,
+  .discussion-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .letter-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .combat-grid,
+  .narrative-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .timeline-track {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .slide-content-split,
+  .slide-grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+
+  .title-main {
+    font-size: 2.6rem;
+  }
+
+  .hero-stats-bar {
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .stat-divider {
+    width: 60px;
+    height: 1px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .weapon-tabs {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .weapon-content {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+<body>
+  <!-- Background Ambient Canvas -->
+  <canvas id="ambient-canvas"></canvas>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <span class="logo-mark">零</span>
+        <div class="logo-text">
+          <span class="en">PHANTOM BLADE ZERO</span>
+          <span class="kr">팬텀 블레이드 제로 · 影之刃零</span>
+        </div>
+      </div>
+
+      <nav class="nav-links">
+        <a href="#overview" class="nav-link active" data-i18n="nav_overview">작품 개요</a>
+        <a href="#aesthetics" class="nav-link" data-i18n="nav_aesthetics">무협 펑크 미학</a>
+        <a href="#combat" class="nav-link" data-i18n="nav_combat">액션 & 안무</a>
+        <a href="#narrative" class="nav-link" data-i18n="nav_narrative">서사 & 철학</a>
+        <a href="#comparison" class="nav-link" data-i18n="nav_comparison">한·중 콘솔 비교</a>
+        <a href="#academic" class="nav-link" data-i18n="nav_academic">학술 토론</a>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Language Switcher -->
+        <div class="lang-switch">
+          <button class="lang-btn active" data-lang="ko">한국어</button>
+          <button class="lang-btn" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="zh">中文</button>
+        </div>
+
+        <!-- Ambient Sound Toggle -->
+        <button id="sound-toggle" class="btn-icon" title="배경 사운드 On/Off">
+          <i data-lucide="volume-x" id="sound-icon"></i>
+        </button>
+
+        <!-- Presentation Mode Toggle -->
+        <button id="presentation-btn" class="btn-secondary" title="프레젠테이션 모드">
+          <i data-lucide="presentation"></i>
+          <span data-i18n="btn_presentation">발표 모드</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section" id="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="badge-tag">
+        <span class="badge-dot"></span>
+        <span data-i18n="hero_badge">동아시아 차세대 게임 문화 연구 보고</span>
+      </div>
+      <h1 class="hero-title">
+        <span class="title-sub" data-i18n="hero_sub">동양 무협의 정수와 다크 펑크의 결합</span>
+        <span class="title-main">PHANTOM BLADE ZERO</span>
+        <span class="title-hanzi">影之刃零 : 팬텀 블레이드 제로</span>
+      </h1>
+      <p class="hero-description" data-i18n="hero_desc">
+        예일대 건축학 출신 디렉터 양기량(Soulframe Liang)과 홍콩 무술의 거장 켄지 타니가키가 빚어낸 독창적 액션 RPG. 언리얼 엔진 5(UE5) 기술과 동양적 죽음관(66일의 유예)이 교차하는 '쿵푸펑크(Kungfupunk)'의 신기원.
+      </p>
+
+      <div class="hero-meta-grid">
+        <div class="meta-item">
+          <span class="label" data-i18n="meta_developer">개발사</span>
+          <span class="val">S-GAME (灵游坊)</span>
+        </div>
+        <div class="meta-item">
+          <span class="label" data-i18n="meta_genre">장르</span>
+          <span class="val" data-i18n="val_genre">무협 다크 판타지 액션 RPG</span>
+        </div>
+        <div class="meta-item">
+          <span class="label" data-i18n="meta_platform">플랫폼</span>
+          <span class="val">PlayStation 5 / PC (Steam, EGS)</span>
+        </div>
+        <div class="meta-item">
+          <span class="label" data-i18n="meta_engine">게임 엔진</span>
+          <span class="val">Unreal Engine 5</span>
+        </div>
+      </div>
+
+      <div class="hero-buttons">
+        <a href="#overview" class="btn-primary">
+          <i data-lucide="book-open"></i>
+          <span data-i18n="btn_explore">상세 분석 읽기</span>
+        </a>
+        <a href="#media" class="btn-outline">
+          <i data-lucide="play-circle"></i>
+          <span data-i18n="btn_watch_trailer">게임플레이 영상 보기</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Quick Stats Float Bar -->
+    <div class="hero-stats-bar">
+      <div class="stat-card">
+        <div class="stat-num">66 <span class="unit" data-i18n="unit_days">일</span></div>
+        <div class="stat-label" data-i18n="stat_heart">주인공 심장 유예 기한</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-card">
+        <div class="stat-num">60 <span class="unit">FPS</span></div>
+        <div class="stat-label" data-i18n="stat_speed">초고속 프레임 쿵푸 콤보</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-card">
+        <div class="stat-num">16+ <span class="unit" data-i18n="unit_years">년</span></div>
+        <div class="stat-label" data-i18n="stat_legacy">인디 '우혈(雨血)'에서 AAA로의 여정</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-card">
+        <div class="stat-num">UE5</div>
+        <div class="stat-label" data-i18n="stat_tech">Lumen & Nanite 차세대 그래픽</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Letter to the Professor (학술적 서문) -->
+  <section class="section letter-section" id="overview">
+    <div class="container">
+      <div class="academic-letter-card">
+        <div class="letter-header">
+          <div class="stamp-icon"><i data-lucide="graduation-cap"></i></div>
+          <div>
+            <span class="letter-tag" data-i18n="letter_badge">교수님을 위한 연구 브리핑</span>
+            <h2 class="letter-title" data-i18n="letter_title">왜 지금 '팬텀 블레이드 제로'를 주목해야 하는가?</h2>
+          </div>
+        </div>
+        
+        <div class="letter-body">
+          <p class="lead-quote" data-i18n="letter_quote">
+            "최근 동아시아 콘솔 게임 시장은 한국의 《P의 거짓(Lies of P)》, 《스텔라 블레이드(Stellar Blade)》와 중국의 《검은 신화: 오공(Black Myth: Wukong)》에 이어 전례 없는 문화적·기술적 도약을 이뤄내고 있습니다. 그 정점에 서 있는 차기 기대작이 바로 《팬텀 블레이드 제로》입니다."
+          </p>
+          <div class="letter-columns">
+            <div class="col">
+              <h4 data-i18n="col1_title"><i data-lucide="layers"></i> 1. 장르의 재창조: '쿵푸펑크'</h4>
+              <p data-i18n="col1_desc">
+                기존의 전통 무협(Wuxia)이 지닌 보수적 규범을 탈피하여, 스팀펑크 기계장치와 오컬트 괴기, 다크 판타지를 접목한 완전히 새로운 미학적 카테고리를 구축했습니다.
+              </p>
+            </div>
+            <div class="col">
+              <h4 data-i18n="col2_title"><i data-lucide="sword"></i> 2. 무술 영화 문법의 디지털 복원</h4>
+              <p data-i18n="col2_desc">
+                견자단 무술팀 출신이자 《바람의 검심》 실사영화 무술감독인 켄지 타니가키가 실사 모션캡처를 총괄하여, 단순한 프레임 캔슬 액션을 넘어선 홍콩 황금기 무술 영화의 리듬감을 구현했습니다.
+              </p>
+            </div>
+            <div class="col">
+              <h4 data-i18n="col3_title"><i data-lucide="compass"></i> 3. 건축학적 공간과 서사의 융합</h4>
+              <p data-i18n="col3_desc">
+                예일대 건축석사 출신의 디렉터 양기량의 전문성이 투영되어, 폐쇄적이면서도 유기적인 동양식 다층 구조 맵 디자인과 66일이라는 유한한 실존적 카운트다운 서사가 결합되었습니다.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Four Pillars of Phantom Blade Zero -->
+  <section class="section pillars-section" id="aesthetics">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-subtitle" data-i18n="pillars_subtitle">CORE PILLARS</span>
+        <h2 class="section-title" data-i18n="pillars_title">팬텀 블레이드 제로를 정의하는 4대 기둥</h2>
+        <div class="title-bar"></div>
+      </div>
+
+      <div class="pillars-grid">
+        <!-- Pillar 1 -->
+        <div class="pillar-card">
+          <div class="pillar-idx">01</div>
+          <div class="pillar-icon"><i data-lucide="palette"></i></div>
+          <h3 data-i18n="p1_head">쿵푸펑크 (Kungfupunk) 미학</h3>
+          <p class="pillar-summary" data-i18n="p1_sub">동양의 수묵화적 음산함과 기계공학적 기괴함의 융합</p>
+          <ul class="pillar-list">
+            <li data-i18n="p1_item1"><strong>비(雨)와 안개, 피</strong>: 2008년 인디 원작 《우혈(雨血)》부터 이어져 온 잿빛 수묵 톤과 핏빛의 강렬한 대비.</li>
+            <li data-i18n="p1_item2"><strong>기계 의수와 도교 오컬트</strong>: 증기 기관, 톱니바퀴 동력과 부적, 좀비형 개조인간이 뒤섞인 비틀린 강호(江湖) 세계관.</li>
+            <li data-i18n="p1_item3"><strong>탈인간화된 신체</strong>: 인체 개조와 기계적 장기가 보편화된 디스토피아적 무림 사회 묘사.</li>
+          </ul>
+          <div class="pillar-tag">Aesthetic Innovation</div>
+        </div>
+
+        <!-- Pillar 2 -->
+        <div class="pillar-card">
+          <div class="pillar-idx">02</div>
+          <div class="pillar-icon"><i data-lucide="zap"></i></div>
+          <h3 data-i18n="p2_head">정통 무술 안무 & 극속(極速) 전투</h3>
+          <p class="pillar-summary" data-i18n="p2_sub">소울라이크의 답답함을 깬 쾌감 넘치는 60FPS 쿵푸 액션</p>
+          <ul class="pillar-list">
+            <li data-i18n="p2_item1"><strong>켄지 타니가키(谷垣健治)의 모션 디렉팅</strong>: 실제 무술 유단자들의 대인 공방을 물리적으로 캡처하여 공격과 방어가 쉼 없이 얽히는 합(合) 구현.</li>
+            <li data-i18n="p2_item2"><strong>이원화된 무기 시스템</strong>: 주무기(쌍검, 태도)와 '팬텀 무기'(사자포, 화염 기관총, 도끼)의 매끄러운 콤보 연계.</li>
+            <li data-i18n="p2_item3"><strong>고성능 패링과 고스트 스텝</strong>: 타이밍 패링 및 회피 후 즉각적인 반격(초살) 메커니즘 제공.</li>
+          </ul>
+          <div class="pillar-tag">Combat Choreography</div>
+        </div>
+
+        <!-- Pillar 3 -->
+        <div class="pillar-card">
+          <div class="pillar-idx">03</div>
+          <div class="pillar-icon"><i data-lucide="building"></i></div>
+          <h3 data-i18n="p3_head">예일대 건축학의 공간 철학</h3>
+          <p class="pillar-summary" data-i18n="p3_sub">디렉터 양기량(Soulframe)의 독특한 이력이 낳은 레벨 디자인</p>
+          <ul class="pillar-list">
+            <li data-i18n="p3_item1"><strong>수직적 입체 구조</strong>: 평면적 오픈월드가 아닌 밀도 높은 반(半)오픈월드 샌드박스로, 절벽, 비밀 지하도, 목조 성곽이 입체적으로 연결.</li>
+            <li data-i18n="p3_item2"><strong>동양 목구조의 해체</strong>: 정교한 당나라·송나라식 공포(拱包) 건축물이 부패하고 기계화된 잔혹한 환경 조성.</li>
+            <li data-i18n="p3_item3"><strong>시각적 프레이밍</strong>: 문과 창, 누각의 프레임을 통해 시네마틱한 구도를 게임플레이 내내 자연스럽게 유도.</li>
+          </ul>
+          <div class="pillar-tag">Spatial Architecture</div>
+        </div>
+
+        <!-- Pillar 4 -->
+        <div class="pillar-card">
+          <div class="pillar-idx">04</div>
+          <div class="pillar-icon"><i data-lucide="cpu"></i></div>
+          <h3 data-i18n="p4_head">UE5 기술적 도약과 몰입감</h3>
+          <p class="pillar-summary" data-i18n="p4_sub">차세대 콘솔의 한계를 시험하는 나나이트와 루멘 조명</p>
+          <ul class="pillar-list">
+            <li data-i18n="p4_item1"><strong>실시간 유체 및 천 물리</strong>: 비에 젖은 도포 자락, 피가 튀는 질감, 빗방울이 칼날에 튀는 미세한 디테일 구현.</li>
+            <li data-i18n="p4_item2"><strong>반사광과 흑백 모노톤의 대조</strong>: 루멘(Lumen) 글로벌 일루미네이션을 활용한 음영의 극적 연출.</li>
+            <li data-i18n="p4_item3"><strong>PS5 듀얼센스 햅틱 최적화</strong>: 칼날의 충돌과 무기의 무게감을 손끝으로 전달하는 촉각적 피드백 설계.</li>
+          </ul>
+          <div class="pillar-tag">Technical Prowess</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Combat Breakdown & Interactive Weapon Showcase -->
+  <section class="section combat-section" id="combat">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-subtitle" data-i18n="combat_subtitle">COMBAT SYSTEM DEEP-DIVE</span>
+        <h2 class="section-title" data-i18n="combat_title">액션 메커니즘과 무기 체계 심층 분석</h2>
+        <p class="section-desc" data-i18n="combat_desc">소울라이크의 무거운 리듬과 캐릭터 액션(데빌 메이 크라이, 닌자 가이덴)의 민첩함을 융합한 독창적 전투 구조</p>
+        <div class="title-bar"></div>
+      </div>
+
+      <div class="combat-grid">
+        <!-- Interactive Weapon Tabs -->
+        <div class="weapon-showcase">
+          <div class="weapon-tabs">
+            <button class="weapon-tab-btn active" data-target="w-dual">
+              <i data-lucide="swords"></i>
+              <span data-i18n="w_tab1">비천 쌍도 (Dual Blades)</span>
+            </button>
+            <button class="weapon-tab-btn" data-target="w-great">
+              <i data-lucide="shield"></i>
+              <span data-i18n="w_tab2">단도 & 흑검 (Heavy Blade)</span>
+            </button>
+            <button class="weapon-tab-btn" data-target="w-cannon">
+              <i data-lucide="flame"></i>
+              <span data-i18n="w_tab3">호효 사자포 (Tiger Cannon)</span>
+            </button>
+            <button class="weapon-tab-btn" data-target="w-whip">
+              <i data-lucide="crosshair"></i>
+              <span data-i18n="w_tab4">팬텀 암 & 도끼 (Phantom Axe)</span>
+            </button>
+          </div>
+
+          <div class="weapon-display-box">
+            <!-- Weapon 1 Content -->
+            <div class="weapon-content active" id="w-dual">
+              <div class="weapon-info">
+                <span class="weapon-type-badge" data-i18n="w1_type">주무기 / 고속 연타형</span>
+                <h3 data-i18n="w1_name">쌍도: 유영(遊影)과 쾌도(快刀)</h3>
+                <p data-i18n="w1_desc">
+                  홍콩 정통 무술의 쌍검술을 기반으로 한 초근접 무기입니다. 적의 공격 궤적 사이를 파고들며 쉴 새 없이 기세를 꺾고, 빈틈이 생겼을 때 전광석화 같은 난타를 가합니다.
+                </p>
+                <div class="weapon-stats">
+                  <div class="w-stat">
+                    <span data-i18n="stat_atk_speed">공격 속도</span>
+                    <div class="bar"><div class="fill" style="width: 95%;"></div></div>
+                  </div>
+                  <div class="w-stat">
+                    <span data-i18n="stat_parry_window">패링 민감도</span>
+                    <div class="bar"><div class="fill" style="width: 90%;"></div></div>
+                  </div>
+                  <div class="w-stat">
+                    <span data-i18n="stat_stagger">그로기 유발</span>
+                    <div class="bar"><div class="fill" style="width: 65%;"></div></div>
+                  </div>
+                </div>
+                <div class="choreography-note">
+                  <i data-lucide="film"></i>
+                  <span data-i18n="w1_kenji">켄지 타니가키 코멘트: "쌍검의 칼날이 서로 맞부딪히며 내는 금속성 리듬은 영화 《살파랑》과 《도화선》에서 구현하고자 했던 궁극의 대련 감각을 재현합니다."</span>
+                </div>
+              </div>
+              <div class="weapon-visual dual-blade-bg">
+                <div class="visual-badge">Combo Rate: 120 Hit/Min</div>
+              </div>
+            </div>
+
+            <!-- Weapon 2 Content -->
+            <div class="weapon-content" id="w-great">
+              <div class="weapon-info">
+                <span class="weapon-type-badge" data-i18n="w2_type">주무기 / 방어 & 일격 필살</span>
+                <h3 data-i18n="w2_name">흑검: 묵살(墨殺)의 궤적</h3>
+                <p data-i18n="w2_desc">
+                  묵직한 베기 동작과 정확한 카운터 어택에 특화된 장검입니다. 적의 맹공을 흘려보내며 순간적으로 가해지는 횡베기는 적의 방어를 단숨에 붕괴시키며 화면 전체에 먹물이 번지는 시각 효과를 동반합니다.
+                </p>
+                <div class="weapon-stats">
+                  <div class="w-stat">
+                    <span data-i18n="stat_atk_speed">공격 속도</span>
+                    <div class="bar"><div class="fill" style="width: 60%;"></div></div>
+                  </div>
+                  <div class="w-stat">
+                    <span data-i18n="stat_parry_window">패링 민감도</span>
+                    <div class="bar"><div class="fill" style="width: 80%;"></div></div>
+                  </div>
+                  <div class="w-stat">
+                    <span data-i18n="stat_stagger">그로기 유발</span>
+                    <div class="bar"><div class="fill" style="width: 95%;"></div></div>
+                  </div>
+                </div>
+                <div class="choreography-note">
+                  <i data-lucide="film"></i>
+                  <span data-i18n="w2_kenji">액션 철학: 낭비 없는 단 일격의 정적(靜)과 폭발(動)의 극적 대비.</span>
+                </div>
+              </div>
+              <div class="weapon-visual great-blade-bg">
+                <div class="visual-badge">Poise Damage: Massive</div>
+              </div>
+            </div>
+
+            <!-- Weapon 3 Content -->
+            <div class="weapon-content" id="w-cannon">
+              <div class="weapon-info">
+                <span class="weapon-type-badge" data-i18n="w3_type">팬텀 보조무기 / 범위 파괴</span>
+                <h3 data-i18n="w3_name">호효 사자포: 스팀펑크 화약 병기</h3>
+                <p data-i18n="w3_desc">
+                  기계식 사자 머리 형상의 손대포로, 압축 화약과 화염을 순간 방출합니다. 검술 콤보 사이에 캔슬기로 삽입되어 다수의 적을 밀어내거나 거대 보스의 슈퍼아머를 순간 차단하는 데 결정적인 역할을 수행합니다.
+                </p>
+                <div class="weapon-stats">
+                  <div class="w-stat">
+                    <span data-i18n="stat_aoe">범위 피해</span>
+                    <div class="bar"><div class="fill" style="width: 95%;"></div></div>
+                  </div>
+                  <div class="w-stat">
+                    <span data-i18n="stat_cooldown">충전 주기</span>
+                    <div class="bar"><div class="fill" style="width: 50%;"></div></div>
+                  </div>
+                  <div class="w-stat">
+                    <span data-i18n="stat_combo_flex">콤보 캔슬력</span>
+                    <div class="bar"><div class="fill" style="width: 90%;"></div></div>
+                  </div>
+                </div>
+                <div class="choreography-note">
+                  <i data-lucide="cpu"></i>
+                  <span data-i18n="w3_kenji">스팀펑크 요소: 전통 무협에 기계공학 화기가 유기적으로 결합된 쿵푸펑크의 정체성.</span>
+                </div>
+              </div>
+              <div class="weapon-visual cannon-bg">
+                <div class="visual-badge">Burst Damage: High</div>
+              </div>
+            </div>
+
+            <!-- Weapon 4 Content -->
+            <div class="weapon-content" id="w-whip">
+              <div class="weapon-info">
+                <span class="weapon-type-badge" data-i18n="w4_type">팬텀 보조무기 / 변형 근력 무기</span>
+                <h3 data-i18n="w4_name">기계 개조 의수 & 도끼</h3>
+                <p data-i18n="w4_desc">
+                  신체 개조를 통해 장착된 기계 의수에서 사슬과 도끼가 전개됩니다. 공중에 뜬 적을 지상으로 내리꽂거나 원거리의 적을 끌어당겨 연속 참격으로 이어지는 다채로운 입체 기동을 가능하게 합니다.
+                </p>
+                <div class="weapon-stats">
+                  <div class="w-stat">
+                    <span data-i18n="stat_crowd_control">군중 제어</span>
+                    <div class="bar"><div class="fill" style="width: 90%;"></div></div>
+                  </div>
+                  <div class="w-stat">
+                    <span data-i18n="stat_reach">공격 사거리</span>
+                    <div class="bar"><div class="fill" style="width: 85%;"></div></div>
+                  </div>
+                  <div class="w-stat">
+                    <span data-i18n="stat_air_combo">공중 콤보 연계</span>
+                    <div class="bar"><div class="fill" style="width: 90%;"></div></div>
+                  </div>
+                </div>
+                <div class="choreography-note">
+                  <i data-lucide="wrench"></i>
+                  <span data-i18n="w4_kenji">인체 개조의 비극성: 육신을 기계로 대체한 자들의 잔혹한 살상 메커니즘.</span>
+                </div>
+              </div>
+              <div class="weapon-visual axe-bg">
+                <div class="visual-badge">Utility: Displacement</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Combat Philosophy Cards -->
+        <div class="combat-mechanics-side">
+          <div class="mechanic-card">
+            <div class="m-head">
+              <i data-lucide="shield-alert"></i>
+              <h4 data-i18n="m1_title">Ghost Step (귀보 / 鬼步)</h4>
+            </div>
+            <p data-i18n="m1_desc">적의 연타 사이를 종이 한 장 차이로 미끄러져 들어가는 정밀 회피. 잔상이 남으며 적의 후방을 점유하여 역공의 기회를 창출합니다.</p>
+          </div>
+          
+          <div class="mechanic-card">
+            <div class="m-head">
+              <i data-lucide="refresh-cw"></i>
+              <h4 data-i18n="m2_title">Dual-Path Combo System</h4>
+            </div>
+            <p data-i18n="m2_desc">초보자는 리듬감 있는 버튼 입력만으로도 화려한 연계 공격을 시전할 수 있으며, 숙련자는 방향키와 캔슬 타이밍을 통해 수십 가지 자유 파생기를 설계 가능합니다.</p>
+          </div>
+
+          <div class="mechanic-card">
+            <div class="m-head">
+              <i data-lucide="sparkles"></i>
+              <h4 data-i18n="m3_title">Sha (煞) 기세 차단과 피니셔</h4>
+            </div>
+            <p data-i18n="m3_desc">소울라이크의 스태미나 고갈 개념과 달리, 공방의 주도권을 빼앗는 '기세(氣勢)' 시스템. 적의 칼날을 받아칠수록 화면이 슬로우모션으로 진입하며 시네마틱 처형기로 전개됩니다.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Narrative & Existential Philosophy -->
+  <section class="section narrative-section" id="narrative">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-subtitle" data-i18n="narrative_subtitle">NARRATIVE & PHILOSOPHY</span>
+        <h2 class="section-title" data-i18n="narrative_title">서사적 비극성과 66일의 실존적 시간관</h2>
+        <div class="title-bar"></div>
+      </div>
+
+      <div class="narrative-layout">
+        <!-- Story Timeline Card -->
+        <div class="narrative-main-card">
+          <div class="timeline-visual">
+            <div class="time-node">
+              <span class="time-tag">PROLOGUE</span>
+              <h4>조직의 암살자, 함정에 빠지다</h4>
+              <p>주인공 '혼(魂, Soul)'은 강호 최고의 비밀 결사 '조직(The Order)'의 일인자였으나, 수장의 의문의 피살 사건의 진범으로 지목받고 배신당합니다.</p>
+            </div>
+            <div class="time-node active">
+              <span class="time-tag">THE CURSE: 66 DAYS</span>
+              <h4>기계 심장과 66일의 유예</h4>
+              <p>치명상을 입고 버려진 그는 신비한 치유사에게 구출되어 특수한 치료를 받습니다. 그러나 그 생명은 단 '66일'간만 유지되는 기계적 심장에 묶이게 됩니다.</p>
+            </div>
+            <div class="time-node">
+              <span class="time-tag">THE ODYSSEY</span>
+              <h4>진실을 찾는 혈로(血路)</h4>
+              <p>남은 수명이 시시각각 사라지는 가운데, 혼은 자신을 사냥해오는 과거의 동료들과 기괴한 신체 개조를 자행하는 거대 음모의 배후를 향해 검을 뽑습니다.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Philosophical Discussion Box -->
+        <div class="philosophy-box">
+          <div class="ph-header">
+            <i data-lucide="quote"></i>
+            <h3 data-i18n="ph_title">문화철학적 고찰: 동양적 무상(無常)과 실존주의</h3>
+          </div>
+          <div class="ph-content">
+            <div class="ph-point">
+              <h4>1. 불교적 '제행무상(諸行無常)'과 카운트다운</h4>
+              <p>
+                주인공의 심장은 영원한 부활(소울류의 불사자 모티프)이 아닌 '단 한 번의 한정된 시간(66일)'이라는 엄혹한 유한성을 부과받습니다. 이는 삶의 덧없음 속에서 비로소 행동의 당위성을 찾는 실존적 비장미를 극대화합니다.
+              </p>
+            </div>
+            <div class="ph-point">
+              <h4>2. 유교적 '충(忠)'과 '의(義)'의 해체</h4>
+              <p>
+                조직과 사제지간, 맹세를 목숨보다 중시하던 전통 무협의 질서가 권력욕과 기술적 개조로 타락한 세계입니다. 혼의 여정은 낡은 규범의 복원이 아닌, 허위의 질서를 베어 넘기는 탈주선(line of flight)입니다.
+              </p>
+            </div>
+            <div class="ph-point">
+              <h4>3. 도교적 신체관과 트랜스휴머니즘의 충돌</h4>
+              <p>
+                자연의 기(氣)를 수련하던 동양의 육신관이 기계 부품과 톱니바퀴로 잠식되는 광경은, 21세기 아시아가 겪어온 급격한 근대화·기계화의 문화적 불안과 무의식을 반영하고 있습니다.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- East Asian AAA Action Game Comparison (Crucial for Professor) -->
+  <section class="section comparison-section" id="comparison">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-subtitle" data-i18n="comp_subtitle">ACADEMIC COMPARISON</span>
+        <h2 class="section-title" data-i18n="comp_title">동아시아 콘솔 대작 비교 연구</h2>
+        <p class="section-desc" data-i18n="comp_desc">한국과 중국이 글로벌 콘솔 무대에서 주도하는 차세대 액션 게임의 미학 및 문법 분석</p>
+        <div class="title-bar"></div>
+      </div>
+
+      <div class="comparison-table-wrapper">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th data-i18n="th_metric">비교 항목</th>
+              <th class="highlight">팬텀 블레이드 제로<br><span class="sub-th">(S-Game, 중국)</span></th>
+              <th>P의 거짓 (Lies of P)<br><span class="sub-th">(Round8/네오위즈, 한국)</span></th>
+              <th>스텔라 블레이드<br><span class="sub-th">(Shift Up, 한국)</span></th>
+              <th>검은 신화: 오공<br><span class="sub-th">(Game Science, 중국)</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="row-label" data-i18n="row_genre">장르 지향</td>
+              <td class="highlight bold">다크 쿵푸펑크 ARPG</td>
+              <td>정통 소울라이크 (벨에포크 고딕)</td>
+              <td>스타일리시 포스트아포칼립스 액션</td>
+              <td>고전 신화 재해석 액션 RPG</td>
+            </tr>
+            <tr>
+              <td class="row-label" data-i18n="row_combat_tempo">전투 템포 & 공방</td>
+              <td class="highlight"><strong>극도로 빠름 (60FPS 합 겨루기)</strong><br>모션캡처 무술 영화식 공방</td>
+              <td>신중함, 패링 중심 타이밍 공방 (그로기 유도)</td>
+              <td>경쾌한 콤보, 저스트 가드 및 회피</td>
+              <td>봉술 모션, 변신술 및 도술 중심</td>
+            </tr>
+            <tr>
+              <td class="row-label" data-i18n="row_aesthetic">미학적 뿌리</td>
+              <td class="highlight"><strong>동양 무협 + 스팀펑크 + 오컬트</strong></td>
+              <td>19세기 서구 벨에포크 + 피노키오 잔혹동화</td>
+              <td>사이버펑크 SF + 미소녀 미학</td>
+              <td>《서유기》 기반 동양 불교/도교 판타지</td>
+            </tr>
+            <tr>
+              <td class="row-label" data-i18n="row_action_director">액션 총괄</td>
+              <td class="highlight"><strong>켄지 타니가키 (실제 홍콩 무술감독)</strong></td>
+              <td>자체 전투 디자인 (소울라이크 전문팀)</td>
+              <td>김형태 & 이동기 디렉팅 (호쾌한 액션)</td>
+              <td>양치(Yang Qi) & 자체 무술 연구팀</td>
+            </tr>
+            <tr>
+              <td class="row-label" data-i18n="row_world">레벨 디자인</td>
+              <td class="highlight"><strong>입체적 다층 구조 반오픈월드</strong></td>
+              <td>정교하게 얽힌 고전 소울식 숏컷 구조</td>
+              <td>세미오픈월드 사막 + 선형 던전 복합</td>
+              <td>광활한 챕터별 선형/세미오픈 탐험</td>
+            </tr>
+            <tr>
+              <td class="row-label" data-i18n="row_implication">산업적 함의</td>
+              <td class="highlight">인디 게임 원작(우혈)의 16년만 AAA 승격</td>
+              <td>한국 콘솔 싱글플레이어 게임의 역사적 이정표</td>
+              <td>한국 액션 IP의 소니 세컨드 파티 글로벌 성공</td>
+              <td>중국 콘솔 AAA 시장의 폭발적 개화</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Comparative Insight Callout -->
+      <div class="insight-banner">
+        <div class="insight-icon"><i data-lucide="lightbulb"></i></div>
+        <div class="insight-text">
+          <h4 data-i18n="insight_title">교수님과의 토론 포인트 : 동아시아 문화원형의 현대적 디지털 번역</h4>
+          <p data-i18n="insight_desc">
+            과거 서구 및 일본 개발사가 독점하던 글로벌 AAA 시장에서, 한국은 서구 고전의 완벽한 기술적 체화(《P의 거짓》)와 감각적 SF 액션(《스텔라 블레이드》)으로 돌파구를 찾았습니다. 반면 중국의 《팬텀 블레이드 제로》는 자국의 '무협'이라는 고유 서사를 그대로 복제하지 않고, 스팀펑크 및 사이버네틱스와 결합하여 <strong>'동양 하위문화의 글로벌 보편화'</strong>를 시도하고 있다는 점에서 비교 미학적 가치가 매우 높습니다.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Creator & Studio Profile -->
+  <section class="section studio-section" id="creator">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-subtitle" data-i18n="studio_subtitle">DEVELOPER & CREATIVE MINDS</span>
+        <h2 class="section-title" data-i18n="studio_title">개발사 S-GAME과 핵심 크리에이터</h2>
+        <div class="title-bar"></div>
+      </div>
+
+      <div class="creators-grid">
+        <!-- Creator 1: Liang Qi -->
+        <div class="creator-card">
+          <div class="creator-badge">DIRECTOR & FOUNDER</div>
+          <div class="creator-profile-header">
+            <div class="avatar-box"><i data-lucide="user-check"></i></div>
+            <div>
+              <h3>양기량 (Soulframe Liang / 梁其伟)</h3>
+              <p class="role">총괄 프로듀서 및 세계관 창작자</p>
+            </div>
+          </div>
+          <div class="creator-bio">
+            <p>
+              칭화대학교(Tsinghua Univ.) 건축학 학사 및 예일대학교(Yale Univ.) 건축학 석사 출신이라는 독특한 학술적 이력을 보유하고 있습니다. 2008년 대학 재학 중 RPG Maker 툴로 1인 제작한 인디 무협 게임 《우혈: 사진(雨血：死镇)》이 글로벌 컬트 팬덤을 형성하며 게임계에 투신했습니다.
+            </p>
+            <div class="creator-quote">
+              <i data-lucide="quote"></i>
+              <span>"건축은 공간을 통해 사람의 감정을 조율하는 학문입니다. 《팬텀 블레이드 제로》의 맵과 무술은 바로 그 3차원 공간 속에서 펼쳐지는 살아있는 건축적 경험입니다."</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Creator 2: Kenji Tanigaki -->
+        <div class="creator-card">
+          <div class="creator-badge">ACTION DIRECTOR</div>
+          <div class="creator-profile-header">
+            <div class="avatar-box"><i data-lucide="clapperboard"></i></div>
+            <div>
+              <h3>켄지 타니가키 (谷垣健治)</h3>
+              <p class="role">전투 및 무술 액션 총괄 감독</p>
+            </div>
+          </div>
+          <div class="creator-bio">
+            <p>
+              홍콩 액션의 전설 견자단(Donnie Yen) 무술팀의 핵심 멤버이자, 영화 《바람의 검심》 5부작, 《도화선》, 《살파랑》 등의 무술 감독을 역임한 세계적 무술 안무가입니다. 홍콩 스턴트맨 협회 최초의 외국인 정회원이기도 합니다.
+            </p>
+            <div class="creator-quote">
+              <i data-lucide="quote"></i>
+              <span>"단순히 멋진 애니메이션을 만드는 것이 아니라, 칼날이 부딪칠 때 느껴지는 생사의 긴장감과 신체 중심의 이동을 디지털 데이터로 완벽히 치환했습니다."</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Studio Evolution Milestones -->
+      <div class="studio-timeline">
+        <h3 class="timeline-title" data-i18n="timeline_title">S-GAME 16년의 서사적 진화: 1인 인디에서 글로벌 콘솔 AAA로</h3>
+        <div class="timeline-track">
+          <div class="track-item">
+            <div class="year">2008</div>
+            <h4>우혈: 사진 (Rainblood)</h4>
+            <p>양기량 1인 제작. RPG Maker 툴 기반 흑백 수묵 다크 무협 인디 명작 탄생.</p>
+          </div>
+          <div class="track-item">
+            <div class="year">2011</div>
+            <h4>우혈 2: 엽응 (烨城)</h4>
+            <p>정식 개발팀 'Soulframe Studio' 결성. 독창적 아트 스타일로 해외 스팀 입점.</p>
+          </div>
+          <div class="track-item">
+            <div class="year">2014-2021</div>
+            <h4>影之刃 (Phantom Blade) 시리즈</h4>
+            <p>텐센트 등의 투자 유치. 모바일 횡스크롤 액션으로 2천만 명 이상 유저 확보 및 R&D 축적.</p>
+          </div>
+          <div class="track-item active">
+            <div class="year">2023-현재</div>
+            <h4>팬텀 블레이드 제로 (Zero)</h4>
+            <p>소니 플레이스테이션 쇼케이스 전격 공개. 언리얼 엔진 5 기반 글로벌 AAA 콘솔 도전.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Academic Discussion Topics for the Professor -->
+  <section class="section academic-section" id="academic">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-subtitle" data-i18n="acad_subtitle">DISCUSSION TOPICS</span>
+        <h2 class="section-title" data-i18n="acad_title">교수님과 함께 나누고 싶은 4가지 학술 담론</h2>
+        <p class="section-desc" data-i18n="acad_desc">게임학, 문화콘텐츠학, 미디어 미학 세미나 또는 연구 프로젝트 주제로의 제안</p>
+        <div class="title-bar"></div>
+      </div>
+
+      <div class="discussion-grid">
+        <div class="disc-card">
+          <div class="disc-header">
+            <div class="disc-num">01</div>
+            <h4>전통 장르의 탈지역화(De-localization)와 '쿵푸펑크'</h4>
+          </div>
+          <p class="disc-question">
+            중국의 '무협'은 오랫동안 한자 문화권의 전유물이자 진입장벽이 높은 장르로 여겨졌습니다. 《팬텀 블레이드 제로》는 스팀펑크와 다크 판타지라는 글로벌 보편 기호와 무협을 어떻게 교잡(Hybridization)하여 서구 및 한국 시장의 수용성을 높였는가?
+          </p>
+          <div class="disc-tag">문화콘텐츠학 / 장르 변용론</div>
+        </div>
+
+        <div class="disc-card">
+          <div class="disc-header">
+            <div class="disc-num">02</div>
+            <h4>소울라이크 피로도와 '합(合)' 중심 액션의 귀환</h4>
+          </div>
+          <p class="disc-question">
+            《다크 소울》 이후 전 세계 액션 게임을 지배해온 '스태미나 관리형 턴제 회피' 공식에서 벗어나, 홍콩 무술 영화의 빠른 연격과 공방(Attack & Counter-defense)을 디지털화하는 것은 하드코어 액션 게임 문법에 어떤 대안적 경로를 제시하는가?
+          </p>
+          <div class="disc-tag">게임디자인학 / 인터랙션 메커니즘</div>
+        </div>
+
+        <div class="disc-card">
+          <div class="disc-header">
+            <div class="disc-num">03</div>
+            <h4>동아시아 비디오게임 생태계의 패러다임 전환</h4>
+          </div>
+          <p class="disc-question">
+            한국의 《P의 거짓》, 《스텔라 블레이드》, 중국의 《검은 신화: 오공》과 《팬텀 블레이드 제로》로 이어지는 흐름은, 기존 모바일 가챠(Gacha) 중심 BM에서 싱글플레이 콘솔 패키지 프리미엄 모델로의 산업적 역량 이전을 의미하는가?
+          </p>
+          <div class="disc-tag">게임산업론 / 플랫폼 경제학</div>
+        </div>
+
+        <div class="disc-card">
+          <div class="disc-header">
+            <div class="disc-num">04</div>
+            <h4>시한부 서사(66일)와 게이머의 시간적 실존성</h4>
+          </div>
+          <p class="disc-question">
+            게임플레이 시간과 내러티브 내의 절대적 시간 제약(66일) 사이의 긴장감은 플레이어의 몰입과 도덕적 선택에 어떤 심리적 압박과 카타르시스를 부여하는가?
+          </p>
+          <div class="disc-tag">서사학 / 루돌로지(Ludology)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Media & Video Showcase -->
+  <section class="section media-section" id="media">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-subtitle" data-i18n="media_subtitle">TRAILER & SHOWCASE</span>
+        <h2 class="section-title" data-i18n="media_title">공식 게임플레이 영상 및 시각 자료</h2>
+        <div class="title-bar"></div>
+      </div>
+
+      <div class="media-container">
+        <!-- Interactive Video Player Mockup / Embed Guide -->
+        <div class="video-wrapper">
+          <div class="responsive-video">
+            <iframe 
+              src="https://www.youtube-nocookie.com/embed/n4K_z5U7x48?rel=0" 
+              title="Phantom Blade Zero - Official Gameplay Trailer" 
+              frameborder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              allowfullscreen>
+            </iframe>
+          </div>
+          <div class="video-meta">
+            <div class="video-title">
+              <i data-lucide="play"></i>
+              <span>PlayStation Showcase & Summer Game Fest 공식 게임플레이 트레일러</span>
+            </div>
+            <div class="video-badges">
+              <span class="badge">4K 60FPS Capture</span>
+              <span class="badge">Unreal Engine 5</span>
+              <span class="badge">In-Engine Realtime</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Screenshot Gallery -->
+        <div class="gallery-grid">
+          <div class="gallery-item" onclick="openLightbox('assets/screen1.svg', '폭우 속의 사자탈 보스와의 일기토 (The Rainblood Duel)')">
+            <div class="gallery-thumb thumb-rain">
+              <div class="gallery-overlay">
+                <i data-lucide="zoom-in"></i>
+                <span data-i18n="gallery_item1">폭우 속의 보스전 연출</span>
+              </div>
+            </div>
+          </div>
+          <div class="gallery-item" onclick="openLightbox('assets/screen2.svg', '기계식 사자포와 쌍검의 연계 액션 (Kungfupunk Arsenal)')">
+            <div class="gallery-thumb thumb-cannon">
+              <div class="gallery-overlay">
+                <i data-lucide="zoom-in"></i>
+                <span data-i18n="gallery_item2">쿵푸펑크 기계 병기</span>
+              </div>
+            </div>
+          </div>
+          <div class="gallery-item" onclick="openLightbox('assets/screen3.svg', '예일대 건축학 디렉터의 동양 건축 레벨 (Architectural Level Axis)')">
+            <div class="gallery-thumb thumb-arch">
+              <div class="gallery-overlay">
+                <i data-lucide="zoom-in"></i>
+                <span data-i18n="gallery_item3">고건축 해체주의 레벨 디자인</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Presentation Mode Overlay / Modal -->
+  <div id="presentation-overlay" class="presentation-modal">
+    <div class="pres-header">
+      <div class="pres-title">
+        <i data-lucide="monitor"></i>
+        <span>팬텀 블레이드 제로 - 교수 면담용 슬라이드 뷰</span>
+      </div>
+      <div class="pres-controls">
+        <span id="pres-page-indicator">1 / 5</span>
+        <button id="pres-prev" class="pres-nav-btn"><i data-lucide="chevron-left"></i></button>
+        <button id="pres-next" class="pres-nav-btn"><i data-lucide="chevron-right"></i></button>
+        <button id="pres-close" class="pres-close-btn"><i data-lucide="x"></i></button>
+      </div>
+    </div>
+    <div class="pres-body">
+      <!-- Slide 1 -->
+      <div class="pres-slide active" data-slide="1">
+        <div class="slide-tag">SLIDE 01 : EXECUTIVE SUMMARY</div>
+        <h2>팬텀 블레이드 제로(Phantom Blade Zero) 핵심 요약</h2>
+        <div class="slide-content-split">
+          <div class="text">
+            <p><strong>장르:</strong> 무협 다크 판타지 액션 RPG (쿵푸펑크)</p>
+            <p><strong>개발/총괄:</strong> S-Game / 양기량(Soulframe, 예일대 건축석사)</p>
+            <p><strong>무술 감독:</strong> 켄지 타니가키(홍콩 무술 거장, 견자단 팀, 바람의 검심)</p>
+            <p><strong>엔진/플랫폼:</strong> Unreal Engine 5 / PS5, PC</p>
+            <div class="callout">
+              "중국 인디 게임 원작(우혈)이 16년 만에 차세대 글로벌 콘솔 AAA로 진화한 기념비적 프로젝트"
+            </div>
+          </div>
+          <div class="slide-card-metric">
+            <div class="mini-metric">
+              <span class="m-val">66일</span>
+              <span class="m-lbl">주인공 시한부 생명</span>
+            </div>
+            <div class="mini-metric">
+              <span class="m-val">UE5</span>
+              <span class="m-lbl">루멘 & 나나이트</span>
+            </div>
+            <div class="mini-metric">
+              <span class="m-val">60 FPS</span>
+              <span class="m-lbl">정밀 모션캡처 액션</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="pres-slide" data-slide="2">
+        <div class="slide-tag">SLIDE 02 : AESTHETICS & PHILOSOPHY</div>
+        <h2>쿵푸펑크(Kungfupunk)와 66일의 유한한 시간</h2>
+        <div class="slide-grid-2">
+          <div class="slide-box">
+            <h3><i data-lucide="feather"></i> 미학적 융합 (Hybridization)</h3>
+            <ul>
+              <li>전통 무협의 수묵화적 잿빛 무드 + 비(雨)와 핏빛</li>
+              <li>스팀펑크 증기 기관 및 인체 기계 개조</li>
+              <li>도교적 부적, 주술, 기괴한 괴물(요괴) 디자인</li>
+            </ul>
+          </div>
+          <div class="slide-box">
+            <h3><i data-lucide="hourglass"></i> 서사적 시간성 (Temporality)</h3>
+            <ul>
+              <li>부활의 무한 루프 대신 '66일'이라는 절대 시한부</li>
+              <li>불교적 제행무상과 죽음 앞에서의 실존적 결단</li>
+              <li>조직의 배신과 붕괴하는 강호의 허무주의</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="pres-slide" data-slide="3">
+        <div class="slide-tag">SLIDE 03 : COMBAT SYSTEM</div>
+        <h2>홍콩 영화의 무술 안무를 디지털 게임플레이로</h2>
+        <div class="slide-grid-2">
+          <div class="slide-box">
+            <h3><i data-lucide="sword"></i> 켄지 타니가키의 무술 철학</h3>
+            <ul>
+              <li>단순 프레임 캔슬이 아닌 물리적 공방의 '합(合)' 구현</li>
+              <li>실제 무술 유단자 간의 격렬한 대련 모션 캡처</li>
+              <li>카메라 앵글의 역동적 전환과 타격 충격감</li>
+            </ul>
+          </div>
+          <div class="slide-box">
+            <h3><i data-lucide="sliders"></i> 콤보 & 무기 시스템</h3>
+            <ul>
+              <li>주무기(쌍검/장검) + 보조 팬텀 무기(사자포/도끼) 연계</li>
+              <li>적의 공격을 한 끗 차이로 피하는 귀보(Ghost Step)</li>
+              <li>초보자를 위한 연타 접근성과 숙련자를 위한 파생기 분기</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 4 -->
+      <div class="pres-slide" data-slide="4">
+        <div class="slide-tag">SLIDE 04 : COMPARATIVE RESEARCH</div>
+        <h2>동아시아 차세대 콘솔 액션 게임 지형도</h2>
+        <div class="slide-table-mini">
+          <table>
+            <thead>
+              <tr>
+                <th>타이틀</th>
+                <th>국가 / 개발사</th>
+                <th>미학적 정체성</th>
+                <th>전투 패러다임</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>팬텀 블레이드 제로</strong></td>
+                <td>중국 (S-Game)</td>
+                <td>쿵푸펑크 + 동양 다크판타지</td>
+                <td>초고속 정통 무술 합 공방</td>
+              </tr>
+              <tr>
+                <td><strong>P의 거짓 (Lies of P)</strong></td>
+                <td>한국 (네오위즈)</td>
+                <td>19C 벨에포크 + 잔혹동화</td>
+                <td>정통 소울라이크 타이밍 패링</td>
+              </tr>
+              <tr>
+                <td><strong>스텔라 블레이드</strong></td>
+                <td>한국 (Shift Up)</td>
+                <td>SF 포스트아포칼립스 + 사이버</td>
+                <td>스타일리시 콤보 & 패링</td>
+              </tr>
+              <tr>
+                <td><strong>검은 신화: 오공</strong></td>
+                <td>중국 (Game Science)</td>
+                <td>고전 서유기 동양 신화</td>
+                <td>봉술 & 변신 도술 액션</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Slide 5 -->
+      <div class="pres-slide" data-slide="5">
+        <div class="slide-tag">SLIDE 05 : RESEARCH QUESTIONS</div>
+        <h2>학술 연구 및 교수 면담 토론 제언</h2>
+        <div class="slide-list-cards">
+          <div class="scard">
+            <strong>질문 1:</strong> 동양의 무협 모티프가 스팀펑크와 결합할 때 발생하는 문화적 혼종성과 글로벌 시장 침투 전략은 무엇인가?
+          </div>
+          <div class="scard">
+            <strong>질문 2:</strong> 소울라이크 장르의 문법 고착화 속에서 무술 영화적 합(합)의 귀환이 게임플레이 리듬에 미치는 영향은?
+          </div>
+          <div class="scard">
+            <strong>질문 3:</strong> 한·중 게임 개발사의 콘솔 싱글플레이어 시장 동시 진출이 글로벌 인터랙티브 미디어 지형에 미칠 파급효과는?
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lightbox Modal for Screenshots -->
+  <div id="lightbox-modal" class="lightbox">
+    <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+    <img class="lightbox-img" id="lightbox-target" src="" alt="확대 이미지">
+    <div class="lightbox-caption" id="lightbox-caption"></div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col brand-col">
+          <div class="footer-logo">
+            <span class="logo-mark">零</span>
+            <span class="footer-title">PHANTOM BLADE ZERO</span>
+          </div>
+          <p class="footer-desc" data-i18n="footer_desc">
+            본 웹페이지는 한국의 대학교수 및 연구자를 대상으로 《팬텀 블레이드 제로》의 게임 디자인, 문화 미학, 기술적 성취 및 동아시아 게임 산업적 위상을 체계적으로 소개하기 위해 제작된 학술 분석 브리핑 페이지입니다.
+          </p>
+        </div>
+        <div class="footer-col">
+          <h4 data-i18n="footer_links">바로가기</h4>
+          <ul>
+            <li><a href="#overview" data-i18n="nav_overview">작품 개요</a></li>
+            <li><a href="#aesthetics" data-i18n="nav_aesthetics">무협 펑크 미학</a></li>
+            <li><a href="#combat" data-i18n="nav_combat">액션 & 안무</a></li>
+            <li><a href="#comparison" data-i18n="nav_comparison">한·중 콘솔 비교</a></li>
+            <li><a href="#academic" data-i18n="nav_academic">학술 토론 담론</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 data-i18n="footer_sources">공식 출처 & 연구 레퍼런스</h4>
+          <ul>
+            <li><a href="https://pbzero.s-game.com/" target="_blank" rel="noopener">S-Game Official Website</a></li>
+            <li><a href="https://twitter.com/pbzero_official" target="_blank" rel="noopener">Official X (Twitter)</a></li>
+            <li><a href="https://store.playstation.com" target="_blank" rel="noopener">PlayStation Official Page</a></li>
+            <li><a href="https://www.unrealengine.com" target="_blank" rel="noopener">Epic Games Unreal Engine 5 Case</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Academic Study & Presentation on Phantom Blade Zero. Developed with S-GAME & Kenji Tanigaki References. All trademarks belong to their respective owners.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+/**
+ * Phantom Blade Zero (팬텀 블레이드 제로) - Interactive Controller & i18n
+ * Tailored for Academic Presentation to Korean University Professors
+ */
+
+// ==========================================================================
+// 1. Multilingual Dictionary (Korean - English - Chinese)
+// ==========================================================================
+const translations = {
+  ko: {
+    nav_overview: "작품 개요",
+    nav_aesthetics: "무협 펑크 미학",
+    nav_combat: "액션 & 안무",
+    nav_narrative: "서사 & 철학",
+    nav_comparison: "한·중 콘솔 비교",
+    nav_academic: "학술 토론",
+    btn_presentation: "발표 모드",
+    hero_badge: "동아시아 차세대 게임 문화 연구 보고",
+    hero_sub: "동양 무협의 정수와 다크 펑크의 결합",
+    hero_desc: "예일대 건축학 출신 디렉터 양기량(Soulframe Liang)과 홍콩 무술의 거장 켄지 타니가키가 빚어낸 독창적 액션 RPG. 언리얼 엔진 5(UE5) 기술과 동양적 죽음관(66일의 유예)이 교차하는 '쿵푸펑크(Kungfupunk)'의 신기원.",
+    meta_developer: "개발사",
+    meta_genre: "장르",
+    val_genre: "무협 다크 판타지 액션 RPG",
+    meta_platform: "플랫폼",
+    meta_engine: "게임 엔진",
+    btn_explore: "상세 분석 읽기",
+    btn_watch_trailer: "게임플레이 영상 보기",
+    unit_days: "일",
+    stat_heart: "주인공 심장 유예 기한",
+    stat_speed: "초고속 프레임 쿵푸 콤보",
+    unit_years: "년",
+    stat_legacy: "인디 '우혈(雨血)'에서 AAA로의 여정",
+    stat_tech: "Lumen & Nanite 차세대 그래픽",
+    letter_badge: "교수님을 위한 연구 브리핑",
+    letter_title: "왜 지금 '팬텀 블레이드 제로'를 주목해야 하는가?",
+    letter_quote: "“최근 동아시아 콘솔 게임 시장은 한국의 《P의 거짓(Lies of P)》, 《스텔라 블레이드(Stellar Blade)》와 중국의 《검은 신화: 오공(Black Myth: Wukong)》에 이어 전례 없는 문화적·기술적 도약을 이뤄내고 있습니다. 그 정점에 서 있는 차기 기대작이 바로 《팬텀 블레이드 제로》입니다.”",
+    col1_title: "1. 장르의 재창조: '쿵푸펑크'",
+    col1_desc: "기존의 전통 무협(Wuxia)이 지닌 보수적 규범을 탈피하여, 스팀펑크 기계장치와 오컬트 괴기, 다크 판타지를 접목한 완전히 새로운 미학적 카테고리를 구축했습니다.",
+    col2_title: "2. 무술 영화 문법의 디지털 복원",
+    col2_desc: "견자단 무술팀 출신이자 《바람의 검심》 실사영화 무술감독인 켄지 타니가키가 실사 모션캡처를 총괄하여, 단순한 프레임 캔슬 액션을 넘어선 홍콩 황금기 무술 영화의 리듬감을 구현했습니다.",
+    col3_title: "3. 건축학적 공간과 서사의 융합",
+    col3_desc: "예일대 건축석사 출신의 디렉터 양기량의 전문성이 투영되어, 폐쇄적이면서도 유기적인 동양식 다층 구조 맵 디자인과 66일이라는 유한한 실존적 카운트다운 서사가 결합되었습니다.",
+    pillars_subtitle: "CORE PILLARS",
+    pillars_title: "팬텀 블레이드 제로를 정의하는 4대 기둥",
+    p1_head: "쿵푸펑크 (Kungfupunk) 미학",
+    p1_sub: "동양의 수묵화적 음산함과 기계공학적 기괴함의 융합",
+    p1_item1: "비(雨)와 안개, 피: 2008년 인디 원작 《우혈(雨血)》부터 이어져 온 잿빛 수묵 톤과 핏빛의 강렬한 대비.",
+    p1_item2: "기계 의수와 도교 오컬트: 증기 기관, 톱니바퀴 동력과 부적, 좀비형 개조인간이 뒤섞인 비틀린 강호(江湖) 세계관.",
+    p1_item3: "탈인간화된 신체: 인체 개조와 기계적 장기가 보편화된 디스토피아적 무림 사회 묘사.",
+    p2_head: "정통 무술 안무 & 극속(極速) 전투",
+    p2_sub: "소울라이크의 답답함을 깬 쾌감 넘치는 60FPS 쿵푸 액션",
+    p2_item1: "켄지 타니가키(谷垣健治)의 모션 디렉팅: 실제 무술 유단자들의 대인 공방을 물리적으로 캡처하여 공격과 방어가 쉼 없이 얽히는 합(合) 구현.",
+    p2_item2: "이원화된 무기 시스템: 주무기(쌍검, 태도)와 '팬텀 무기'(사자포, 화염 기관총, 도끼)의 매끄러운 콤보 연계.",
+    p2_item3: "고성능 패링과 고스트 스텝: 타이밍 패링 및 회피 후 즉각적인 반격(초살) 메커니즘 제공.",
+    p3_head: "예일대 건축학의 공간 철학",
+    p3_sub: "디렉터 양기량(Soulframe)의 독특한 이력이 낳은 레벨 디자인",
+    p3_item1: "수직적 입체 구조: 평면적 오픈월드가 아닌 밀도 높은 반(半)오픈월드 샌드박스로, 절벽, 비밀 지하도, 목조 성곽이 입체적으로 연결.",
+    p3_item2: "동양 목구조의 해체: 정교한 당나라·송나라식 공포(拱包) 건축물이 부패하고 기계화된 잔혹한 환경 조성.",
+    p3_item3: "시각적 프레이밍: 문과 창, 누각의 프레임을 통해 시네마틱한 구도를 게임플레이 내내 자연스럽게 유도.",
+    p4_head: "UE5 기술적 도약과 몰입감",
+    p4_sub: "차세대 콘솔의 한계를 시험하는 나나이트와 루멘 조명",
+    p4_item1: "실시간 유체 및 천 물리: 비에 젖은 도포 자락, 피가 튀는 질감, 빗방울이 칼날에 튀는 미세한 디테일 구현.",
+    p4_item2: "반사광과 흑백 모노톤의 대조: 루멘(Lumen) 글로벌 일루미네이션을 활용한 음영의 극적 연출.",
+    p4_item3: "PS5 듀얼센스 햅틱 최적화: 칼날의 충돌과 무기의 무게감을 손끝으로 전달하는 촉각적 피드백 설계.",
+    combat_subtitle: "COMBAT SYSTEM DEEP-DIVE",
+    combat_title: "액션 메커니즘과 무기 체계 심층 분석",
+    combat_desc: "소울라이크의 무거운 리듬과 캐릭터 액션(데빌 메이 크라이, 닌자 가이덴)의 민첩함을 융합한 독창적 전투 구조",
+    w_tab1: "비천 쌍도 (Dual Blades)",
+    w_tab2: "단도 & 흑검 (Heavy Blade)",
+    w_tab3: "호효 사자포 (Tiger Cannon)",
+    w_tab4: "팬텀 암 & 도끼 (Phantom Axe)",
+    w1_type: "주무기 / 고속 연타형",
+    w1_name: "쌍도: 유영(遊影)과 쾌도(快刀)",
+    w1_desc: "홍콩 정통 무술의 쌍검술을 기반으로 한 초근접 무기입니다. 적의 공격 궤적 사이를 파고들며 쉴 새 없이 기세를 꺾고, 빈틈이 생겼을 때 전광석화 같은 난타를 가합니다.",
+    stat_atk_speed: "공격 속도",
+    stat_parry_window: "패링 민감도",
+    stat_stagger: "그로기 유발",
+    w1_kenji: "켄지 타니가키 코멘트: '쌍검의 칼날이 서로 맞부딪히며 내는 금속성 리듬은 영화 《살파랑》과 《도화선》에서 구현하고자 했던 궁극의 대련 감각을 재현합니다.'",
+    w2_type: "주무기 / 방어 & 일격 필살",
+    w2_name: "흑검: 묵살(墨殺)의 궤적",
+    w2_desc: "묵직한 베기 동작과 정확한 카운터 어택에 특화된 장검입니다. 적의 맹공을 흘려보내며 순간적으로 가해지는 횡베기는 적의 방어를 단숨에 붕괴시키며 화면 전체에 먹물이 번지는 시각 효과를 동반합니다.",
+    w2_kenji: "액션 철학: 낭비 없는 단 일격의 정적(靜)과 폭발(動)의 극적 대비.",
+    w3_type: "팬텀 보조무기 / 범위 파괴",
+    w3_name: "호효 사자포: 스팀펑크 화약 병기",
+    w3_desc: "기계식 사자 머리 형상의 손대포로, 압축 화약과 화염을 순간 방출합니다. 검술 콤보 사이에 캔슬기로 삽입되어 다수의 적을 밀어내거나 거대 보스의 슈퍼아머를 순간 차단하는 데 결정적인 역할을 수행합니다.",
+    stat_aoe: "범위 피해",
+    stat_cooldown: "충전 주기",
+    stat_combo_flex: "콤보 캔슬력",
+    w3_kenji: "스팀펑크 요소: 전통 무협에 기계공학 화기가 유기적으로 결합된 쿵푸펑크의 정체성.",
+    w4_type: "팬텀 보조무기 / 변형 근력 무기",
+    w4_name: "기계 개조 의수 & 도끼",
+    w4_desc: "신체 개조를 통해 장착된 기계 의수에서 사슬과 도끼가 전개됩니다. 공중에 뜬 적을 지상으로 내리꽂거나 원거리의 적을 끌어당겨 연속 참격으로 이어지는 다채로운 입체 기동을 가능하게 합니다.",
+    stat_crowd_control: "군중 제어",
+    stat_reach: "공격 사거리",
+    stat_air_combo: "공중 콤보 연계",
+    w4_kenji: "인체 개조의 비극성: 육신을 기계로 대체한 자들의 잔혹한 살상 메커니즘.",
+    m1_title: "Ghost Step (귀보 / 鬼步)",
+    m1_desc: "적의 연타 사이를 종이 한 장 차이로 미끄러져 들어가는 정밀 회피. 잔상이 남으며 적의 후방을 점유하여 역공의 기회를 창출합니다.",
+    m2_title: "Dual-Path Combo System",
+    m2_desc: "초보자는 리듬감 있는 버튼 입력만으로도 화려한 연계 공격을 시전할 수 있으며, 숙련자는 방향키와 캔슬 타이밍을 통해 수십 가지 자유 파생기를 설계 가능합니다.",
+    m3_title: "Sha (煞) 기세 차단과 피니셔",
+    m3_desc: "소울라이크의 스태미나 고갈 개념과 달리, 공방의 주도권을 빼앗는 '기세(氣勢)' 시스템. 적의 칼날을 받아칠수록 화면이 슬로우모션으로 진입하며 시네마틱 처형기로 전개됩니다.",
+    narrative_subtitle: "NARRATIVE & PHILOSOPHY",
+    narrative_title: "서사적 비극성과 66일의 실존적 시간관",
+    ph_title: "문화철학적 고찰: 동양적 무상(無常)과 실존주의",
+    comp_subtitle: "ACADEMIC COMPARISON",
+    comp_title: "동아시아 콘솔 대작 비교 연구",
+    comp_desc: "한국과 중국이 글로벌 콘솔 무대에서 주도하는 차세대 액션 게임의 미학 및 문법 분석",
+    th_metric: "비교 항목",
+    row_genre: "장르 지향",
+    row_combat_tempo: "전투 템포 & 공방",
+    row_aesthetic: "미학적 뿌리",
+    row_action_director: "액션 총괄",
+    row_world: "레벨 디자인",
+    row_implication: "산업적 함의",
+    insight_title: "교수님과의 토론 포인트 : 동아시아 문화원형의 현대적 디지털 번역",
+    insight_desc: "과거 서구 및 일본 개발사가 독점하던 글로벌 AAA 시장에서, 한국은 서구 고전의 완벽한 기술적 체화(《P의 거짓》)와 감각적 SF 액션(《스텔라 블레이드》)으로 돌파구를 찾았습니다. 반면 중국의 《팬텀 블레이드 제로》는 자국의 '무협'이라는 고유 서사를 그대로 복제하지 않고, 스팀펑크 및 사이버네틱스와 결합하여 '동양 하위문화의 글로벌 보편화'를 시도하고 있다는 점에서 비교 미학적 가치가 매우 높습니다.",
+    studio_subtitle: "DEVELOPER & CREATIVE MINDS",
+    studio_title: "개발사 S-GAME과 핵심 크리에이터",
+    timeline_title: "S-GAME 16년의 서사적 진화: 1인 인디에서 글로벌 콘솔 AAA로",
+    acad_subtitle: "DISCUSSION TOPICS",
+    acad_title: "교수님과 함께 나누고 싶은 4가지 학술 담론",
+    acad_desc: "게임학, 문화콘텐츠학, 미디어 미학 세미나 또는 연구 프로젝트 주제로의 제안",
+    media_subtitle: "TRAILER & SHOWCASE",
+    media_title: "공식 게임플레이 영상 및 시각 자료",
+    gallery_item1: "폭우 속의 보스전 연출",
+    gallery_item2: "쿵푸펑크 기계 병기",
+    gallery_item3: "고건축 해체주의 레벨 디자인",
+    footer_desc: "본 웹페이지는 한국의 대학교수 및 연구자를 대상으로 《팬텀 블레이드 제로》의 게임 디자인, 문화 미학, 기술적 성취 및 동아시아 게임 산업적 위상을 체계적으로 소개하기 위해 제작된 학술 분석 브리핑 페이지입니다.",
+    footer_links: "바로가기",
+    footer_sources: "공식 출처 & 연구 레퍼런스"
+  },
+  en: {
+    nav_overview: "Overview",
+    nav_aesthetics: "Kungfupunk Aesthetics",
+    nav_combat: "Action & Combat",
+    nav_narrative: "Narrative & Philosophy",
+    nav_comparison: "KR-CN Console Study",
+    nav_academic: "Academic Topics",
+    btn_presentation: "Slide Mode",
+    hero_badge: "East Asian Next-Gen Gaming Academic Briefing",
+    hero_sub: "A Marriage of Traditional Wuxia & Dark Cyber-Steampunk",
+    hero_desc: "Directed by Soulframe Liang (Yale Architecture alumnus) with action choreography by legendary Hong Kong martial arts director Kenji Tanigaki. A breakthrough ARPG forged in Unreal Engine 5 that redefines 'Kungfupunk' through existential mortality.",
+    meta_developer: "Developer",
+    meta_genre: "Genre",
+    val_genre: "Wuxia Dark Fantasy Action RPG",
+    meta_platform: "Platforms",
+    meta_engine: "Game Engine",
+    btn_explore: "Read Analysis",
+    btn_watch_trailer: "Watch Gameplay Trailer",
+    unit_days: "Days",
+    stat_heart: "Protagonist Heart Countdown",
+    stat_speed: "Ultra-fast 60FPS Kung Fu Combos",
+    unit_years: "Years",
+    stat_legacy: "Indie 'Rainblood' to Global AAA",
+    stat_tech: "Lumen & Nanite Next-Gen Tech",
+    letter_badge: "Academic Research Briefing",
+    letter_title: "Why Examine 'Phantom Blade Zero' Today?",
+    letter_quote: "“Following Korea's 《Lies of P》 and 《Stellar Blade》, and China's 《Black Myth: Wukong》, East Asian console gaming is witnessing an unprecedented renaissance. 《Phantom Blade Zero》 stands at the vanguard of this new wave.”",
+    col1_title: "1. Genre Reinvention: 'Kungfupunk'",
+    col1_desc: "Transcending traditional wuxia orthodoxy by fusing Chinese martial arts with steampunk machinery, occult necromancy, and dark fantasy.",
+    col2_title: "2. Digitizing Hong Kong Martial Arts",
+    col2_desc: "Action choreographed by Kenji Tanigaki (Donnie Yen's stunt team, Rurouni Kenshin movies), translating authentic physical duels into fluid 60FPS gameplay.",
+    col3_title: "3. Spatial Architecture & Narrative",
+    col3_desc: "Crafted by an architect-turned-game director, combining intricate multi-layered oriental spaces with an existential 66-day mortality countdown.",
+    pillars_subtitle: "CORE PILLARS",
+    pillars_title: "Four Pillars Defining Phantom Blade Zero",
+    p1_head: "Kungfupunk Aesthetic",
+    p1_sub: "The convergence of ink-wash gloom and mechanical grotesque",
+    p1_item1: "Rain, Mist, and Blood: Inheriting the bleak ink and blood aesthetics from the 2008 indie origin 'Rainblood'.",
+    p1_item2: "Mechanical Limbs & Daoist Occult: A distorted Jianghu filled with clockwork machinery, steam engines, and talismans.",
+    p1_item3: "Dehumanized Flesh: A dystopian martial society permeated by biomechanical body modification.",
+    p2_head: "Authentic Choreography & Ultra-Fast Combat",
+    p2_sub: "Dynamic 60FPS kung fu breaking away from souls-like sluggishness",
+    p2_item1: "Kenji Tanigaki's Action Direction: Real martial artists motion-captured to simulate the intense push-and-pull exchanges of cinema.",
+    p2_item2: "Dual Weapon System: Seamless combo chaining between primary swords and phantom secondary arms (cannons, axes).",
+    p2_item3: "Precision Parries & Ghost Step: Frame-perfect evasions paired with instantaneous fatal counter-attacks.",
+    p3_head: "Yale Architectural Spatial Philosophy",
+    p3_sub: "Level design informed by Soulframe Liang's architectural discipline",
+    p3_item1: "Vertical Interconnectedness: A dense semi-open sandbox rather than an empty open plain, linking cliffs, catacombs, and wooden fortresses.",
+    p3_item2: "Deconstruction of Ancient Timber: Splendid Tang/Song dynasty architectural joints decayed and mechanized.",
+    p3_item3: "Cinematic Framing: Utilizing windows, moon gates, and corridors to intuitively compose player camera views.",
+    p4_head: "UE5 Technological Breakthrough",
+    p4_sub: "Pushing next-gen console limits with Nanite and Lumen",
+    p4_item1: "Real-time Fluid & Cloth Physics: Rain-soaked silk robes, visceral blood splatter, and water repelled by steel blades.",
+    p4_item2: "Lumen Lighting Contrast: Dynamic illumination emphasizing deep ink shadows and gleaming metallic reflections.",
+    p4_item3: "PS5 DualSense Haptics: Tactile feedback mapping blade-on-blade resistance directly into player palms.",
+    combat_subtitle: "COMBAT SYSTEM DEEP-DIVE",
+    combat_title: "Combat Mechanics & Arsenal In-Depth",
+    combat_desc: "Melding the deliberateness of Souls with the agile exhilaration of character action classics (DMC, Ninja Gaiden)",
+    w_tab1: "Dual Blades (쌍도)",
+    w_tab2: "Heavy Blade (흑검)",
+    w_tab3: "Tiger Cannon (호효 사자포)",
+    w_tab4: "Phantom Axe (기계 도끼)",
+    w1_type: "Primary / High-Speed Flurry",
+    w1_name: "Dual Blades: Fleeting Shadow",
+    w1_desc: "Rooted in traditional dual-sabre techniques. Dances through incoming enemy strike trajectories to break posture before unleashing blinding multi-hit combos.",
+    stat_atk_speed: "Attack Speed",
+    stat_parry_window: "Parry Window",
+    stat_stagger: "Stagger Power",
+    w1_kenji: "Kenji Tanigaki Note: 'The metallic cadence of clashing twin blades captures the authentic dueling adrenaline we strived for in films like SPL and Flash Point.'",
+    w2_type: "Primary / Defense & Heavy Blows",
+    w2_name: "Heavy Blade: Ink Cleave",
+    w2_desc: "A weighty blade engineered for disciplined counters. Sweeping blows shatter enemy guards, splattering dark ink across the screen.",
+    w2_kenji: "Combat Philosophy: Extreme contrast between poised stillness and explosive dynamic execution.",
+    w3_type: "Phantom Weapon / Area Burst",
+    w3_name: "Tiger Cannon: Clockwork Firearm",
+    w3_desc: "A mechanical lion-headed arm cannon unleashing compressed gunpowder flames. Can cancel sword combos to disperse mobs or disrupt boss super-armor.",
+    stat_aoe: "AoE Impact",
+    stat_cooldown: "Charge Cycle",
+    stat_combo_flex: "Combo Flexibility",
+    w3_kenji: "Steampunk Soul: The quintessential mark of Kungfupunk, marrying ancient wuxia with industrial ballistics.",
+    w4_type: "Phantom Weapon / Heavy Displacement",
+    w4_name: "Bionic Arm & Crescent Axe",
+    w4_desc: "A prosthetic arm deploying chains and heavy axes. Slams airborne targets down to earth or pulls distant foes into brutal ground juggles.",
+    stat_crowd_control: "Crowd Control",
+    stat_reach: "Reach Range",
+    stat_air_combo: "Aerial Combo",
+    w4_kenji: "Tragedy of Modification: The ruthless lethality of warriors who sacrificed their mortal flesh.",
+    m1_title: "Ghost Step (귀보 / 鬼步)",
+    m1_desc: "Razor-thin evasive step slipping past relentless barrages, leaving phantom silhouettes while claiming the enemy's blind flank.",
+    m2_title: "Dual-Path Combo System",
+    m2_desc: "Accessible rhythmic button presses for casual fluidity, paired with deep directional and cancel branches for master tacticians.",
+    m3_title: "Sha (煞) Posture & Finishers",
+    m3_desc: "Unlike passive stamina meters, the 'Sha' momentum gauge rewards proactive blade parries, transitioning into slow-motion cinematic executions.",
+    narrative_subtitle: "NARRATIVE & PHILOSOPHY",
+    narrative_title: "Existential Tragedy & The 66-Day Countdown",
+    ph_title: "Cultural Philosophy: Impermanence & Existentialism",
+    comp_subtitle: "ACADEMIC COMPARISON",
+    comp_title: "East Asian Console Game Comparative Study",
+    comp_desc: "Analyzing how Korean and Chinese developers pioneer next-gen action grammar on the global stage",
+    th_metric: "Criterion",
+    row_genre: "Genre Focus",
+    row_combat_tempo: "Combat Tempo",
+    row_aesthetic: "Aesthetic Roots",
+    row_action_director: "Action Direction",
+    row_world: "Level Architecture",
+    row_implication: "Industry Significance",
+    insight_title: "Discussion Note: Modern Digital Translation of Cultural Archetypes",
+    insight_desc: "While Korean developers excelled in mastering Western gothic traditions (《Lies of P》) and slick sci-fi action (《Stellar Blade》), China's 《Phantom Blade Zero》 reconstructs indigenous Wuxia with Steampunk and Cybernetics to pioneer 'Global Asian Subculture Translation'.",
+    studio_subtitle: "DEVELOPER & CREATIVE MINDS",
+    studio_title: "Studio S-GAME & Key Creators",
+    timeline_title: "S-GAME's 16-Year Evolution: From Solo Indie to Global Console AAA",
+    acad_subtitle: "DISCUSSION TOPICS",
+    acad_title: "Four Academic Discussion Prompts for the Professor",
+    acad_desc: "Proposed topics for game studies, media philosophy, and East Asian cultural seminars",
+    media_subtitle: "TRAILER & SHOWCASE",
+    media_title: "Official Gameplay Video & Visual Showcase",
+    gallery_item1: "Rainblood Boss Duel",
+    gallery_item2: "Kungfupunk Mechanical Arsenal",
+    gallery_item3: "Deconstructed Architectural Levels",
+    footer_desc: "This academic briefing page is curated to introduce South Korean professors and researchers to Phantom Blade Zero's game design, cultural aesthetics, and East Asian industrial significance.",
+    footer_links: "Quick Navigation",
+    footer_sources: "Official Sources & References"
+  },
+  zh: {
+    nav_overview: "作品概述",
+    nav_aesthetics: "武侠朋克美学",
+    nav_combat: "动作与武指",
+    nav_narrative: "叙事与哲学",
+    nav_comparison: "中韩主机对比",
+    nav_academic: "学术议题",
+    btn_presentation: "演示模式",
+    hero_badge: "东亚次世代游戏文化与产业研究报告",
+    hero_sub: "东方传统武侠精髓与黑暗朋克的交融",
+    hero_desc: "由耶鲁大学建筑学硕士梁其伟（Soulframe Liang）与香港传奇武术指导谷垣健治联手打造的原创动作RPG。依托虚幻5（UE5）前沿技术与东方生死哲学（66天生命倒计时），开拓‘武侠朋克（Kungfupunk）’全新视界。",
+    meta_developer: "开发团队",
+    meta_genre: "游戏类型",
+    val_genre: "武侠黑暗奇幻动作RPG",
+    meta_platform: "平台",
+    meta_engine: "游戏引擎",
+    btn_explore: "阅读深入分析",
+    btn_watch_trailer: "观看实机演示",
+    unit_days: "天",
+    stat_heart: "主角心脏生命倒计时",
+    stat_speed: "60帧超高速真实功夫连招",
+    unit_years: "年",
+    stat_legacy: "从独立《雨血》到全球AAA之路",
+    stat_tech: "虚幻5 Lumen与Nanite黑科技",
+    letter_badge: "致教授的研究简报",
+    letter_title: "为什么在当下值得关注《影之刃零》？",
+    letter_quote: "“继韩国的《匹诺曹的谎言（Lies of P）》、《星刃（Stellar Blade）》以及中国的《黑神话：悟空（Black Myth: Wukong）》之后，东亚主机游戏正迎来前所未有的文化自信与工业化爆发。《影之刃零》正是这场浪潮中最具代表性的标杆之作。”",
+    col1_title: "1. 类型的重塑：'武侠朋克'",
+    col1_desc: "打破传统武侠保守教条，将中国传统武术与蒸汽朋克机巧、克苏鲁怪诞及黑暗奇幻深度融合，开辟出独树一帜的美学品类。",
+    col2_title: "2. 香港黄金武打片语法的数字复兴",
+    col2_desc: "甄家班核心、电影《浪客剑心》武术指导谷垣健治亲执动捕，摆脱僵硬的取消帧动作，精准还原真实肉搏中的拆招见招与攻防节律。",
+    col3_title: "3. 建筑学空间与存在主义叙事",
+    col3_desc: "总监梁其伟耶鲁建筑学背景赋能，立体解构的东方榫卯楼阁箱庭与‘66天必死’的悲剧倒计时形成强烈张力。",
+    pillars_subtitle: "CORE PILLARS",
+    pillars_title: "定义《影之刃零》的四大核心支柱",
+    p1_head: "武侠朋克 (Kungfupunk) 美学",
+    p1_sub: "水墨肃杀氛围与机械异化人体的碰撞",
+    p1_item1: "雨、雾与血：承袭自2008年独立原作《雨血》的水墨灰暗基调与鲜血反差。",
+    p1_item2: "机械义肢与道家诡术：蒸汽动力、精密齿轮与符咒、改造型傀儡构筑的崩坏江湖。",
+    p1_item3: "异化的人体：机械器官改造泛滥所映射出的反乌托邦武林社会。",
+    p2_head: "正统功夫武指与极速战斗",
+    p2_sub: "打破魂系沉重回圈的高爽度60帧功夫连段",
+    p2_item1: "谷垣健治实战动捕：专业武师实战对抗录制，真正实现刀剑交错、攻守互搏的武打‘见招拆招’。",
+    p2_item2: "双轨武器体系：主武器（双刀、长刀）与影境副武器（狮吼炮、机关斧）行云流水的组合连招。",
+    p2_item3: "精准化解与鬼步：毫厘之间的瞬时闪避与致命绝杀反击机制。",
+    p3_head: "耶鲁建筑学的空间结构哲学",
+    p3_sub: "建筑师跨界游戏总监带来的立体关卡设计",
+    p3_item1: "垂直多层箱庭：拒绝空洞开放世界，以高密度半开放三维空间串联绝壁、密道与木构要塞。",
+    p3_item2: "唐宋木构建筑的解构：庄严斗拱与机械工业残骸的交织，制造出强烈的戏剧荒诞感。",
+    p3_item3: "视线引导与画框构图：借助门窗、廊道形成天然电影机位取景。",
+    p4_head: "虚幻5引擎的视听与沉浸跃迁",
+    p4_sub: "依托Lumen全局光照与Nanite几何体的次世代规格",
+    p4_item1: "实时流体与布料解算：雨打斗篷、鲜血飞溅与刀剑破风的细腻物理表现。",
+    p4_item2: "高反差黑白明暗调校：Lumen光照构建出充满写意水墨感的戏剧化阴影。",
+    p4_item3: "PS5 DualSense触觉反馈：将刃与刃的金铁交击与武器分量精准传达至掌心。",
+    combat_subtitle: "COMBAT SYSTEM DEEP-DIVE",
+    combat_title: "战斗机制与武器兵戈深度解析",
+    combat_desc: "融合魂系博弈的严谨与传统动作清版（鬼泣、忍龙）的高速敏捷",
+    w_tab1: "飞天双刀 (Dual Blades)",
+    w_tab2: "重剑与单刀 (Heavy Blade)",
+    w_tab3: "虎啸狮子炮 (Tiger Cannon)",
+    w_tab4: "机械义肢斧 (Phantom Axe)",
+    w1_type: "主武器 / 高速连击型",
+    w1_name: "双刀：游影与快刀",
+    w1_desc: "脱胎于正统南派双刀与香港近身搏击技。在敌方攻势的间隙穿插撕裂，打崩韧性后施展雷霆般的连续斩切。",
+    stat_atk_speed: "攻击速度",
+    stat_parry_window: "格挡窗口",
+    stat_stagger: "破防能力",
+    w1_kenji: "谷垣健治手记：“双刀互碰的金石之音，正是我们在《导火线》《杀破狼》中追求的至高搏击快感在虚拟世界的再现。”",
+    w2_type: "主武器 / 防御反击与重斩",
+    w2_name: "黑剑：墨杀之锋",
+    w2_desc: "专注于精准弹反与蓄力斩击的大剑。化解敌方刚猛攻势后，一记横斩如浓墨挥毫，瞬间瓦解敌人架势。",
+    w2_kenji: "动作哲学：一击必杀的沉静与极速爆发的剧烈对比。",
+    w3_type: "影境副手武器 / 范围爆发",
+    w3_name: "虎啸狮子炮：蒸汽火药兵器",
+    w3_desc: "机械醒狮造型的腕装手炮，瞬间喷射烈焰与高爆弹片。可穿插在剑招中打断强力Boss霸体或控场。",
+    stat_aoe: "范围杀伤",
+    stat_cooldown: "充能周期",
+    stat_combo_flex: "连招取消度",
+    w3_kenji: "朋克精髓：中国传统舞狮符号与蒸汽机械工业火器的绝妙混血。",
+    w4_type: "影境副手武器 / 位移抓取",
+    w4_name: "机关义肢与重锁斧",
+    w4_desc: "由机械义手延伸出的铁链重斧。可将空中敌人砸击入地，或将远程敌卒强行拉扯至身前进行地面连续处决。",
+    stat_crowd_control: "群体控制",
+    stat_reach: "攻击射程",
+    stat_air_combo: "浮空连段",
+    w4_kenji: "异化的代价：以血肉残缺为代价换取的纯粹杀戮机器。",
+    m1_title: "Ghost Step (鬼步)",
+    m1_desc: "毫厘之间错身避开敌人乱刃，留下残影并在瞬间位移至敌方盲区发起背刺。",
+    m2_title: "双轨连招输入体系",
+    m2_desc: "轻度玩家通过节律单键即可打出武侠电影级流畅套路；硬核玩家可通过方向微操与取消帧自由编织几十种变招。",
+    m3_title: "煞气博弈与电影处决",
+    m3_desc: "摒弃消极精力条，引入主动压制的‘煞气’对峙。刀剑相交越多，画面越易进入极具冲击力的子弹时间与处决动画。",
+    narrative_subtitle: "NARRATIVE & PHILOSOPHY",
+    narrative_title: "悲剧宿命论与66天的存在主义时间观",
+    ph_title: "文化哲学思考：东方无常观与存在主义",
+    comp_subtitle: "ACADEMIC COMPARISON",
+    comp_title: "东亚次世代主机游戏对比研究",
+    comp_desc: "中韩两国在全球主机舞台领衔的次世代动作范式与工业突破",
+    th_metric: "对比维度",
+    row_genre: "类型取向",
+    row_combat_tempo: "战斗节奏与攻防",
+    row_aesthetic: "美学母题",
+    row_action_director: "动作指引",
+    row_world: "关卡空间",
+    row_implication: "产业里程碑",
+    insight_title: "与教授探讨的切入点：东方文化母题的当代数字化转译",
+    insight_desc: "在过去由欧美和日本主导的AAA主机领域，韩国以对西方经典的精湛消化（《匹诺曹的谎言》）与先锋科幻动作（《星刃》）成功突围；而中国《影之刃零》则没有停留在对旧武侠的照搬，而是通过与蒸汽朋克和人体异化的杂糅，实践了‘东方次文化向全球普适性话语的跃迁’，极具比较文艺学研究价值。",
+    studio_subtitle: "DEVELOPER & CREATIVE MINDS",
+    studio_title: "灵游坊 S-GAME 与核心主创阵容",
+    timeline_title: "灵游坊16年演进史：从单人独立RPG到全球主机AAA",
+    acad_subtitle: "DISCUSSION TOPICS",
+    acad_title: "建议与韩国教授共同探讨的4个学术议题",
+    acad_desc: "适宜作为游戏学、文化研究与新媒体美学研讨会或课题研究方向",
+    media_subtitle: "TRAILER & SHOWCASE",
+    media_title: "官方实机影像与视觉档案",
+    gallery_item1: "暴雨中的头目对决演武",
+    gallery_item2: "武侠朋克重装机械兵刃",
+    gallery_item3: "解构主义古建关卡轴线",
+    footer_desc: "本页面旨在向韩国大学教授及研究学者系统呈现《影之刃零》在游戏设计、文化美学创新、前沿技术实现以及东亚游戏工业化浪潮中的学术与产业价值。",
+    footer_links: "页面导览",
+    footer_sources: "官方来源与文献"
+  }
+};
+
+// ==========================================================================
+// 2. Language Switcher Engine
+// ==========================================================================
+let currentLang = 'ko';
+
+function setLanguage(lang) {
+  if (!translations[lang]) return;
+  currentLang = lang;
+
+  // Update button active state
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+
+  // Update text content with data-i18n attributes
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (translations[lang][key]) {
+      el.innerHTML = translations[lang][key];
+    }
+  });
+
+  // Refresh icons
+  if (window.lucide) {
+    lucide.createIcons();
+  }
+}
+
+// ==========================================================================
+// 3. Ambient Rain & Ink Particles Canvas
+// ==========================================================================
+function initAmbientCanvas() {
+  const canvas = document.getElementById('ambient-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  let width = (canvas.width = window.innerWidth);
+  let height = (canvas.height = window.innerHeight);
+
+  window.addEventListener('resize', () => {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  });
+
+  const particles = [];
+  const particleCount = 45;
+
+  for (let i = 0; i < particleCount; i++) {
+    particles.push({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      length: Math.random() * 20 + 10,
+      speed: Math.random() * 3 + 2,
+      opacity: Math.random() * 0.4 + 0.1,
+      sway: Math.random() * 0.5 - 0.25
+    });
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, width, height);
+
+    particles.forEach(p => {
+      ctx.beginPath();
+      ctx.moveTo(p.x, p.y);
+      ctx.lineTo(p.x + p.sway * 5, p.y + p.length);
+      ctx.strokeStyle = `rgba(200, 210, 230, ${p.opacity})`;
+      ctx.lineWidth = 1;
+      ctx.stroke();
+
+      p.y += p.speed;
+      p.x += p.sway;
+
+      if (p.y > height) {
+        p.y = -p.length;
+        p.x = Math.random() * width;
+      }
+    });
+
+    requestAnimationFrame(draw);
+  }
+
+  draw();
+}
+
+// ==========================================================================
+// 4. Synthesized Ambient Sound (Web Audio API - Zero External Dependency)
+// ==========================================================================
+let audioCtx = null;
+let isAudioPlaying = false;
+let ambientGain = null;
+let soundInterval = null;
+
+function toggleAmbientAudio() {
+  const icon = document.getElementById('sound-icon');
+
+  if (!audioCtx) {
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    audioCtx = new AudioContext();
+  }
+
+  if (audioCtx.state === 'suspended') {
+    audioCtx.resume();
+  }
+
+  if (isAudioPlaying) {
+    if (ambientGain) {
+      ambientGain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.8);
+    }
+    clearInterval(soundInterval);
+    isAudioPlaying = false;
+    if (icon) icon.setAttribute('data-lucide', 'volume-x');
+  } else {
+    // Start ethereal low drone & wind chime
+    ambientGain = audioCtx.createGain();
+    ambientGain.gain.setValueAtTime(0.0001, audioCtx.currentTime);
+    ambientGain.gain.exponentialRampToValueAtTime(0.08, audioCtx.currentTime + 1.2);
+    ambientGain.connect(audioCtx.destination);
+
+    // Deep drone osc
+    const osc1 = audioCtx.createOscillator();
+    osc1.type = 'sine';
+    osc1.frequency.setValueAtTime(108, audioCtx.currentTime); // Low A/A#
+    osc1.connect(ambientGain);
+    osc1.start();
+
+    // Occasional gentle bamboo bell / pentatonic chime
+    const pentatonicNotes = [220, 261.63, 293.66, 329.63, 392.0, 440]; // A minor pentatonic
+    soundInterval = setInterval(() => {
+      if (!isAudioPlaying) return;
+      const noteFreq = pentatonicNotes[Math.floor(Math.random() * pentatonicNotes.length)];
+      const bellOsc = audioCtx.createOscillator();
+      const bellGain = audioCtx.createGain();
+
+      bellOsc.type = 'triangle';
+      bellOsc.frequency.setValueAtTime(noteFreq * (Math.random() > 0.5 ? 2 : 1), audioCtx.currentTime);
+
+      bellGain.gain.setValueAtTime(0.03, audioCtx.currentTime);
+      bellGain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 2.5);
+
+      bellOsc.connect(bellGain);
+      bellGain.connect(audioCtx.destination);
+
+      bellOsc.start();
+      bellOsc.stop(audioCtx.currentTime + 2.6);
+    }, 3800);
+
+    isAudioPlaying = true;
+    if (icon) icon.setAttribute('data-lucide', 'volume-2');
+  }
+
+  if (window.lucide) lucide.createIcons();
+}
+
+// ==========================================================================
+// 5. Interactive Weapon Tabs
+// ==========================================================================
+function initWeaponTabs() {
+  const tabs = document.querySelectorAll('.weapon-tab-btn');
+  const contents = document.querySelectorAll('.weapon-content');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const targetId = tab.dataset.target;
+
+      tabs.forEach(t => t.classList.remove('active'));
+      contents.forEach(c => c.classList.remove('active'));
+
+      tab.classList.add('active');
+      const targetContent = document.getElementById(targetId);
+      if (targetContent) {
+        targetContent.classList.add('active');
+      }
+
+      if (window.lucide) lucide.createIcons();
+    });
+  });
+}
+
+// ==========================================================================
+// 6. Presentation Mode (Slide Deck)
+// ==========================================================================
+let currentSlide = 1;
+const totalSlides = 5;
+
+function openPresentation() {
+  const modal = document.getElementById('presentation-overlay');
+  if (modal) {
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    showSlide(1);
+  }
+}
+
+function closePresentation() {
+  const modal = document.getElementById('presentation-overlay');
+  if (modal) {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+}
+
+function showSlide(index) {
+  if (index < 1) index = 1;
+  if (index > totalSlides) index = totalSlides;
+  currentSlide = index;
+
+  const slides = document.querySelectorAll('.pres-slide');
+  slides.forEach(s => {
+    s.classList.toggle('active', parseInt(s.dataset.slide) === currentSlide);
+  });
+
+  const indicator = document.getElementById('pres-page-indicator');
+  if (indicator) {
+    indicator.textContent = `${currentSlide} / ${totalSlides}`;
+  }
+
+  if (window.lucide) lucide.createIcons();
+}
+
+// ==========================================================================
+// 7. Lightbox for Screenshots
+// ==========================================================================
+function openLightbox(imgSrc, captionText) {
+  const modal = document.getElementById('lightbox-modal');
+  const targetImg = document.getElementById('lightbox-target');
+  const caption = document.getElementById('lightbox-caption');
+
+  if (modal && targetImg && caption) {
+    targetImg.src = imgSrc;
+    caption.textContent = captionText;
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeLightbox() {
+  const modal = document.getElementById('lightbox-modal');
+  if (modal) {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+}
+
+// ==========================================================================
+// 8. Scrollspy for Navigation Links
+// ==========================================================================
+function initScrollspy() {
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    const scrollPos = window.scrollY + 200;
+
+    sections.forEach(section => {
+      const top = section.offsetTop;
+      const height = section.offsetHeight;
+      if (scrollPos >= top && scrollPos < top + height) {
+        current = section.getAttribute('id');
+      }
+    });
+
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === `#${current}`) {
+        link.classList.add('active');
+      }
+    });
+  });
+}
+
+// ==========================================================================
+// 9. Document Ready Initialization
+// ==========================================================================
+document.addEventListener('DOMContentLoaded', () => {
+  // Init Lucide Icons
+  if (window.lucide) {
+    lucide.createIcons();
+  }
+
+  // Init Components
+  initAmbientCanvas();
+  initWeaponTabs();
+  initScrollspy();
+
+  // Language buttons
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      setLanguage(btn.dataset.lang);
+    });
+  });
+
+  // Sound toggle button
+  const soundBtn = document.getElementById('sound-toggle');
+  if (soundBtn) {
+    soundBtn.addEventListener('click', toggleAmbientAudio);
+  }
+
+  // Presentation button & modal controls
+  const presBtn = document.getElementById('presentation-btn');
+  if (presBtn) {
+    presBtn.addEventListener('click', openPresentation);
+  }
+
+  const presClose = document.getElementById('pres-close');
+  if (presClose) presClose.addEventListener('click', closePresentation);
+
+  const presPrev = document.getElementById('pres-prev');
+  if (presPrev) presPrev.addEventListener('click', () => showSlide(currentSlide - 1));
+
+  const presNext = document.getElementById('pres-next');
+  if (presNext) presNext.addEventListener('click', () => showSlide(currentSlide + 1));
+
+  // Keyboard navigation for presentation mode
+  document.addEventListener('keydown', (e) => {
+    const modal = document.getElementById('presentation-overlay');
+    if (modal && modal.classList.contains('active')) {
+      if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') {
+        showSlide(currentSlide + 1);
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        showSlide(currentSlide - 1);
+      } else if (e.key === 'Escape') {
+        closePresentation();
+      }
+    }
+
+    const lb = document.getElementById('lightbox-modal');
+    if (lb && lb.classList.contains('active') && e.key === 'Escape') {
+      closeLightbox();
+    }
+  });
+
+  // Close lightbox on backdrop click
+  const lbModal = document.getElementById('lightbox-modal');
+  if (lbModal) {
+    lbModal.addEventListener('click', (e) => {
+      if (e.target === lbModal) closeLightbox();
+    });
+  }
+});
+
+
+</script>
+</body>
+</html>
+
